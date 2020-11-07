@@ -4,7 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="Ecinema">
-	
+
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 
 
@@ -13,7 +13,9 @@
 		<class>com.watchme.models.Personne</class>
 		<class>com.watchme.models.Administrateur</class>
 		<class>com.watchme.models.Membre</class>
-
+		<class>com.watchme.models.Artiste</class>
+		<class>com.watchme.models.Acteur</class>
+		<class>com.watchme.models.Realisateur</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
