@@ -1,6 +1,7 @@
 package com.watchme.models;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
