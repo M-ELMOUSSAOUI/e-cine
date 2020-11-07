@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Test {
-	private static final String PERSISTENCE_UNIT_NAME = "e-cinema";
+	private static final String PERSISTENCE_UNIT_NAME = "Ecinema";
     private static EntityManagerFactory factory;
  public static void main(String[] args) {
 	 
