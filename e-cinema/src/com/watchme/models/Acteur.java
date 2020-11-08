@@ -20,8 +20,9 @@ public class Acteur extends Artiste {
 	// bi-directional many-to-many association to Film
 	@ManyToMany
 	@JoinTable(
-			  joinColumns = @JoinColumn(name = "id"), 
-			  inverseJoinColumns = @JoinColumn(name = "id"))
+			name = "Films_Acteurs_Associations" ,
+			  joinColumns = @JoinColumn(name = "id_Acteur"), 
+			  inverseJoinColumns = @JoinColumn(name = "id_Film"))
 	private List<Film> films;
 	public Acteur() {
 		super();
