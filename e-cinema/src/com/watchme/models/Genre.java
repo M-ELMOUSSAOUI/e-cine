@@ -3,17 +3,15 @@ package com.watchme.models;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
 
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Artiste implements Serializable {
+@Entity
+public class Genre implements Serializable {
 
 	/**
 	 * 
@@ -21,22 +19,28 @@ public class Artiste implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
 	private Long id;
 	private String nom;
 
+	// bi-directional one-to-many association to Film
 
-	// Constructors
-	public Artiste() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@OneToMany(mappedBy = "genre")
+	private List<Film> films;
 
-	public Artiste(String nom) {
+	// constructors
+
+	public Genre(String nom) {
 		super();
 		this.nom = nom;
 	}
 
-	// Getters and Setters
+	public Genre() {
+
+	}
+
+	// getters and setters
+
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +57,12 @@ public class Artiste implements Serializable {
 		this.nom = nom;
 	}
 
+	public List<Film> getFilms() {
+		return films;
+	}
 
+	public void setFilms(List<Film> films) {
+		this.films = films;
+	}
 
 }

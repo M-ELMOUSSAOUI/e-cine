@@ -16,6 +16,8 @@
 		<class>com.watchme.models.Artiste</class>
 		<class>com.watchme.models.Acteur</class>
 		<class>com.watchme.models.Realisateur</class>
+		<class>com.watchme.models.Film</class>
+		<class>com.watchme.models.Genre   </class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />

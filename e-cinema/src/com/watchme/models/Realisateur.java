@@ -1,6 +1,9 @@
 package com.watchme.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity 
 public class Realisateur extends Artiste {
@@ -12,7 +15,10 @@ public class Realisateur extends Artiste {
 	private String nationalite ;
 	
 	
-	
+	// bi-directional one-to-many association to Film
+
+		@OneToMany(mappedBy = "realisateur")
+		private List<Film> films;
 	
 	public Realisateur(String nationalite) {
 		super();
