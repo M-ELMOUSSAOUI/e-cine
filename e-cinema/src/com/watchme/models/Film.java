@@ -40,7 +40,7 @@ public class Film implements Serializable {
 	private Programme programme;
 
 	// bi-directional many-to-many association to Acteur
-	@ManyToMany
+	@ManyToMany(mappedBy = "films")
 	private List<Acteur> acteurs;
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
