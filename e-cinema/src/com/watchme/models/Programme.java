@@ -13,19 +13,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Programme implements Serializable {
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
+	@Temporal(TemporalType.DATE)
 	private Date dateProjection;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date heureDebut;
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date heureFin;
 
 	// bi-directional many-to-one association to Salle

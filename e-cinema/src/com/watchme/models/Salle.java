@@ -15,9 +15,8 @@ import com.watchme.models.Programme;
 @Entity
 public class Salle implements Serializable {
 
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +37,6 @@ public class Salle implements Serializable {
 
 	public Salle() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	// Getters and Setters
