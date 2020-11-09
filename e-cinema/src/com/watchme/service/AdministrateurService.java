@@ -1,5 +1,6 @@
 package com.watchme.service;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -29,4 +30,36 @@ public class AdministrateurService {
 		}
 
 	}
+
+     // Get Administrateur par ID
+	public Administrateur get(long id) {
+		entityManager.getTransaction().begin();
+		Administrateur administrateur= entityManager.find(Administrateur.class, id);
+		System.out.println(administrateur);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return administrateur;
+	}
+
+	public void add(Administrateur administrateur) {
+		entityManager.getTransaction().begin();
+		entityManager.persist(administrateur);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void update(Administrateur administrateur) {
+		entityManager.getTransaction().begin();
+		entityManager.merge(administrateur);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
+
+	public void delete(Administrateur administrateur) {
+		entityManager.getTransaction().begin();
+		entityManager.remove(administrateur);
+		entityManager.getTransaction().commit();
+		entityManager.close();
+	}
 }
+
