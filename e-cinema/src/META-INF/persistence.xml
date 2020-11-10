@@ -18,6 +18,7 @@
 		<class>com.watchme.models.Realisateur</class>
 		<class>com.watchme.models.Film</class>
 		<class>com.watchme.models.Genre   </class>
+			<class>com.watchme.models.AbstractModel  </class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />

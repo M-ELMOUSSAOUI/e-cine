@@ -1,56 +1,22 @@
 package com.watchme.service;
 
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import com.watchme.models.Salle;
+import com.watchme.repository.SalleRepository;
 
-public class SalleService {
+@Service
+public class SalleService  extends AbstractService<Salle, Long> {
 
-	private static final String PERSISTENCE_UNIT_NAME = "Ecinema";
-	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-	EntityManager entityManager = factory.createEntityManager();
+    @Autowired
+    private SalleRepository sallesRepository;
 
-	public List<Salle> findAll() {
-		entityManager.getTransaction().begin();
-		// Create Query
-		List<Salle> salles = entityManager.createQuery("SELECT s FROM Salle AS s", Salle.class).getResultList();
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		return salles;
-	}
-
-	public Salle get(long id) {
-		entityManager.getTransaction().begin();
-		Salle salle = entityManager.find(Salle.class, id);
-		System.out.println(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		return salle;
-	}
-
-	public void add(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
-
-	public void update(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.merge(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
-
-	public void delete(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
+    @Override
+    protected JpaRepository<Salle, Long> getRepository() {
+        return sallesRepository;
+    }
 
 }
