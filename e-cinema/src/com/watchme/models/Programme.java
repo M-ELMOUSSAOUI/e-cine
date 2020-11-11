@@ -44,7 +44,6 @@ public class Programme implements Serializable {
 
 	// constructeurs
 	public Programme() {
-
 	}
 
 	public Programme(Date dateProjection, Date heureDebut, Date heureFin) {
