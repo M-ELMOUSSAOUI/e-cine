@@ -23,9 +23,7 @@ public class Salle   implements Serializable {
 	private Long id;
 	private Integer numero;
 	private Integer nombrePlace;
-	//bi-directional one-to-many association to Programme
-	@OneToMany(mappedBy="salle")
-	private List<Programme> programmes;
+
 
 	// Constructors
 	public Salle(Integer numero, Integer nombrePlace) {
@@ -64,12 +62,6 @@ public class Salle   implements Serializable {
 		this.nombrePlace = nombrePlace;
 	}
 
-	public List<Programme> getProgrammes() {
-		return programmes;
-	}
-
-	public void setProgrammes(List<Programme> programmes) {
-		this.programmes = programmes;
-	}
+	
 
 }

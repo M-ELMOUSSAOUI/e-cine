@@ -21,6 +21,7 @@ public class SalleBean {
 	private boolean addMode = false;
 
 	public ArrayList<Salle> getAllsalles() {
+		allsalles = salleservice.findAll();
 		return allsalles;
 	}
 
@@ -37,10 +38,12 @@ public class SalleBean {
 	}
 
 	public SalleService getSalleservice() {
+		
 		return salleservice;
 	}
 
 	public void setSalleservice(SalleService salleservice) {
+		
 		this.salleservice = salleservice;
 	}
 
@@ -90,7 +93,7 @@ public class SalleBean {
 		addMode = true;
 	}
 
-	public void addProduit() {
+	public void addSalle() {
 
 		// salleToAdd.setCategorie(categorieservice.findById(idCategorie));
 		salleservice.save(salleToAdd);

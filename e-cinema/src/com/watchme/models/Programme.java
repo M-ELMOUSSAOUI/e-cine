@@ -27,32 +27,29 @@ public class Programme implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	@Temporal(TemporalType.DATE)
-	private Date dateProjection;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date heureDebut;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date heureFin;
+	private Date dateDebut;
+	@Temporal(TemporalType.DATE)
+	private Date dateFin;
+	
 
-	// bi-directional many-to-one association to Salle
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Salle salle;
+	
 
-	// bi-directional one-to-many association to Film
 
-	@OneToMany(mappedBy = "programme")
-	private List<Film> films;
 
 	// constructeurs
 	public Programme() {
 
 	}
 
-	public Programme(Date dateProjection, Date heureDebut, Date heureFin) {
+	
+
+	public Programme(Date dateDebut, Date dateFin) {
 		super();
-		this.dateProjection = dateProjection;
-		this.heureDebut = heureDebut;
-		this.heureFin = heureFin;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
 	}
+
+
 
 	// getters setters
 	public Long getId() {
@@ -63,48 +60,30 @@ public class Programme implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDateProjection() {
-		return dateProjection;
+
+
+	public Date getDateDebut() {
+		return dateDebut;
 	}
 
-	public void setDateProjection(Date dateProjection) {
-		this.dateProjection = dateProjection;
+
+
+	public void setDateDebut(Date dateDebut) {
+		this.dateDebut = dateDebut;
 	}
 
-	public Date getHeureDebut() {
-		return heureDebut;
+
+
+	public Date getDateFin() {
+		return dateFin;
 	}
 
-	public void setHeureDebut(Date heureDebut) {
-		this.heureDebut = heureDebut;
+
+
+	public void setDateFin(Date dateFin) {
+		this.dateFin = dateFin;
 	}
 
-	public Date getHeureFin() {
-		return heureFin;
-	}
-
-	public void setHeureFin(Date heureFin) {
-		this.heureFin = heureFin;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public Salle getSalle() {
-		return salle;
-	}
-
-	public void setSalle(Salle salle) {
-		this.salle = salle;
-	}
-
-	public List<Film> getFilms() {
-		return films;
-	}
-
-	public void setFilms(List<Film> films) {
-		this.films = films;
-	}
+	
 
 }
