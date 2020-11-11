@@ -1,3 +1,4 @@
+
 package com.watchme.service;
 
 
@@ -62,4 +63,5 @@ public class AdministrateurService {
 		entityManager.close();
 	}
 }
+
 
