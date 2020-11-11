@@ -4,9 +4,17 @@
   <fixed facet="jst.web"/>
   <fixed facet="wst.jsdt.web"/>
   <fixed facet="java"/>
+<<<<<<< HEAD
   <installed facet="jst.web" version="3.1"/>
+=======
+>>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
   <installed facet="wst.jsdt.web" version="1.0"/>
   <installed facet="jpt.jpa" version="2.2"/>
   <installed facet="jst.jsf" version="2.2"/>
+<<<<<<< HEAD
   <installed facet="java" version="15"/>
+=======
+  <installed facet="jst.web" version="4.0"/>
+  <installed facet="java" version="14"/>
+>>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
 </faceted-project>

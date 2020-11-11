@@ -35,9 +35,6 @@ public class Film implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Genre genre;
 
-	// bi-directional many-to-one association to Programme
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Programme programme;
 
 	// bi-directional many-to-many association to Acteur
 	@ManyToMany(mappedBy = "films")
@@ -52,7 +49,7 @@ public class Film implements Serializable {
 	}
 
 	public Film(String titre, Double duree, String photo, String description, Date datederealisation, String fiche,
-			Genre genre, Programme programme, List<Acteur> acteurs, Realisateur realisateur) {
+			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
 		super();
 		this.titre = titre;
 		this.duree = duree;
@@ -61,7 +58,6 @@ public class Film implements Serializable {
 		this.datederealisation = datederealisation;
 		this.fiche = fiche;
 		this.genre = genre;
-		this.programme = programme;
 		this.acteurs = acteurs;
 		this.realisateur = realisateur;
 	}
@@ -133,13 +129,7 @@ public class Film implements Serializable {
 		this.genre = genre;
 	}
 
-	public Programme getProgramme() {
-		return programme;
-	}
-
-	public void setProgramme(Programme programme) {
-		this.programme = programme;
-	}
+	
 
 	public List<Acteur> getActeurs() {
 		return acteurs;

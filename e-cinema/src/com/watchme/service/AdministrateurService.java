@@ -1,3 +1,4 @@
+
 package com.watchme.service;
 
 
@@ -5,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 import com.watchme.models.Administrateur;
 
@@ -19,10 +19,10 @@ public class AdministrateurService {
     public boolean login(Administrateur administrateur) {
 		try {
 			
-			 TypedQuery<Administrateur> query = entityManager.createQuery("SELECT a FROM Administrateur a WHERE a.username = :username AND a.password = :pass", Administrateur.class);
-			    query.setParameter("username", administrateur.getUsername());
-			    query.setParameter("pass", administrateur.getPassword());
-			    query.getSingleResult();
+			Query query = entityManager.createQuery("SELECT a FROM Administrateur a WHERE a.username = :username AND u.password = :password\r\n"+ "");
+	        query.setParameter(1, administrateur.getUsername());
+	        query.setParameter(2,administrateur.getPassword()); 
+	        query.getSingleResult();
 			return true;
 
 		} catch (Exception e) {
@@ -63,4 +63,5 @@ public class AdministrateurService {
 		entityManager.close();
 	}
 }
+
 

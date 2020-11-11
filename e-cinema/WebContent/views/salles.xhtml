@@ -1,0 +1,123 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" template="../index.xhtml">
+	<ui:define name="contenu">
+
+		<!-- afficher table admins -->
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">Produits Appro</h6>
+			</div>
+			<div class="card-body">
+				<h:form>
+					<div class="table-responsive">
+						<div class="left">
+							<h:form id="action">
+
+								<p:commandButton id="addSalle" value="Ajouter"
+									action="#{salles.prepareAdd}" ajax="false"
+									icon="ui-icon-circle-plus" />
+							</h:form>
+						</div>
+
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Numero</th>
+									<th>Nombre de place</th>
+
+
+
+
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>ID</th>
+									<th>Numero</th>
+									<th>Nombre de place</th>
+
+
+
+								</tr>
+							</tfoot>
+							<tbody>
+								<ui:repeat value="${salles.allsalles}" var="s">
+									<tr>
+										<td>${s.id}</td>
+										<td>${s.numero}</td>
+										<td>${s.nombrePlace }</td>
+
+
+
+									</tr>
+
+
+								</ui:repeat>
+
+
+							</tbody>
+						</table>
+					</div>
+				</h:form>
+			</div>
+
+		</div>
+		<!-- Ajouter salle-->
+
+		<h:form class="user" rendered="#{salles.addMode}">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Produits</h6>
+				</div>
+				<div class="card-body">
+
+					<div class="p-5">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-4">Ajouter un produit</h1>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								<h:outputLabel value="Nombre de place:" for="nombrePlace" />
+								<h:inputText type="number"
+									value="#{salles.salleToAdd.nombrePlace}"
+									class="form-control form-control-user" id="nombrePlace"
+									placeholder="Nombre de place">
+									<f:validateRequired />
+								</h:inputText>
+							</div>
+							<div class="col-sm-6">
+								<h:outputLabel value="Numero" for="Numero" />
+								<h:inputText type="text" value="#{salles.salleToAdd.numero}"
+									class="form-control form-control-user" id="numero"
+									placeholder="Numero">
+									<f:validateRequired />
+								</h:inputText>
+							</div>
+						</div>
+							<div class="col-sm-2">
+						<p:commandButton id="btn_cancelAdd" value="Annuler"
+							action="#{salles.cancelAdd}" class="btn btn-danger " immediate="true"
+							ajax="false" />
+						<h:commandButton value="Ajouter une salle"
+							action="#{salles.addSalle()}"
+							class="btn btn-secondary " />
+							</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+
+
+
+		<!-- FIN D AJOUT -->
+	</ui:define>
+</ui:composition>
+
+
+

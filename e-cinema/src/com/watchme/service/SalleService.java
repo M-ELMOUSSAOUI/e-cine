@@ -1,56 +1,79 @@
+
 package com.watchme.service;
 
+
+
+import java.util.ArrayList;
+
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import com.watchme.models.Salle;
 
+
+
+
 public class SalleService {
-
 	private static final String PERSISTENCE_UNIT_NAME = "Ecinema";
-	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-	EntityManager entityManager = factory.createEntityManager();
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    EntityManager em = factory.createEntityManager();
 
-	public List<Salle> findAll() {
-		entityManager.getTransaction().begin();
-		// Create Query
-		List<Salle> salles = entityManager.createQuery("SELECT s FROM Salle AS s", Salle.class).getResultList();
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		return salles;
-	}
+    // GET ALL salles
+    public ArrayList<Salle> findAll() {
+     
+    	Query query = em.createQuery("SELECT s FROM Salle s");
+    	ArrayList<Salle> salles = new ArrayList<Salle>();
+     	List<Salle> list = query.getResultList();
+    	 for (Salle s: list) {
+		     Salle salle = new Salle();
+		     salle.setId(s.getId());
+		 salle.setNombrePlace(s.getNombrePlace());
+		 salle.setNumero(s.getNumero());
+		   
+		    salles.add(salle);
+		
+		     
+		  }
+		return  salles ;
 
-	public Salle get(long id) {
-		entityManager.getTransaction().begin();
-		Salle salle = entityManager.find(Salle.class, id);
-		System.out.println(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-		return salle;
-	}
+    }
+   // get salle by id
+    public Salle findById(Long id) {
+    	
+        return (Salle)em.find(Salle.class, id);
+    }
+   // insert new salle in table
+    public void save(Salle salle) {
+    	em.getTransaction().begin();
+        em.persist(salle);
+        em.getTransaction().commit();
 
-	public void add(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.persist(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
-
-	public void update(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.merge(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
-
-	public void delete(Salle salle) {
-		entityManager.getTransaction().begin();
-		entityManager.remove(salle);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-	}
+        
+    }
+    
+    	
+    
+    //close connection 
+    public void Close() {
+    	em.close();
+    }
+    //update salle
+    public void update(Salle salle) {
+    	em.getTransaction().begin();
+    	em.merge(salle);
+  	  em.getTransaction().commit();
+    }
+   //remove salle from table
+    public void deleteById(Long id) {
+    	Salle salle = em.find(Salle.class, id);
+    	em.getTransaction().begin();
+    	  em.remove(salle);
+    	  em.getTransaction().commit();
+    }
 
 }

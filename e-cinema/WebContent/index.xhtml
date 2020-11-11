@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+		<ui:include src="templates/Components/head.xhtml" />
+		</f:facet>
+	</h:head>
+	<h:body id="page-top">
+		
+		
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+
+		<ui:include src="templates/Components/menu.xhtml" />
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+			</nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+			
+		
+			<ui:insert name="contenu">
+			
+                    Contenu Principal en Foncion de l'opération choisie<br />
+				</ui:insert>
+		</div>
+		</div>
+			<!-- End of Main Content -->
+
+			<!-- Footer -->
+
+			<ui:include src="templates/Components/footer.xhtml" />
+			<!-- End of Footer -->
+		</div>
+		</div>
+		<ui:include src="templates/Components/scripts.xhtml" />
+	</h:body>
+</f:view>
+</html>
