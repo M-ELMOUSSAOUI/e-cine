@@ -52,13 +52,12 @@
 										<td>${s.numero}</td>
 										<td>${s.nombrePlace }</td>
 										<td><h:commandButton class="btn btn-danger"
-												action="#{salles.delete(s.id)}"
-												value="delete"
+												action="#{salles.delete(s.id)}" value="delete"
 												onclick="return confirm('Are you sure to delete product?')">
-											</h:commandButton> 
-											<h:commandButton class="btn btn-warning" id="editSalle"
+											</h:commandButton> <h:commandButton class="btn btn-warning" id="editSalle"
 												action="#{salles.edit}" value="Edit">
-												<f:param name = "idToEdit" value = "${s.id}" /> 
+												<f:setPropertyActionListener target="#{salles.data}"
+													value="${s.id}" />
 											</h:commandButton></td>
 
 
@@ -77,7 +76,7 @@
 		</div>
 		<!-- Ajouter salle-->
 
-		<h:form class="user"  id="formNew" rendered="#{salles.addMode}">
+		<h:form class="user" id="formNew" rendered="#{salles.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Produits</h6>
@@ -129,7 +128,7 @@
 
 
 		<!-- FIN D AJOUT -->
-				<!-- Update salle-->
+		<!-- Update salle-->
 
 		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
 			<div class="card shadow mb-4">
@@ -146,7 +145,7 @@
 							<div class="col-sm-6 mb-3 mb-sm-0">
 								<h:outputLabel value="Nombre de place:" for="nombrePlaceEdit" />
 								<h:inputText type="number"
-									value="#{salles.salle.nombrePlace}"
+								value="#{salles.salle.nombrePlace}"
 									class="form-control form-control-user" id="nombrePlaceEdit"
 									placeholder="Nombre de place">
 									<f:validateRequired />
@@ -154,9 +153,8 @@
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Numero" for="numeroEdit" />
-								<h:inputText type="text" value="#{salles.salle.numero}"
-									class="form-control form-control-user" id="numeroEdit"
-									placeholder="Numero">
+								<h:inputText type="text" class="form-control form-control-user"
+									id="numeroEdit" value="#{salles.salle.numero}" placeholder="Numero">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
@@ -170,7 +168,8 @@
 
 							<div class="col">
 								<h:commandButton value="Modifier"
-									action="#{salles.updateSalle()}" class="btn btn-secondary active " />
+									action="#{salles.updateSalle()}"
+									class="btn btn-secondary active " />
 							</div>
 						</div>
 					</div>
@@ -183,8 +182,8 @@
 
 
 		<!-- FIN D update -->
-		
-		
+
+
 	</ui:define>
 </ui:composition>
 

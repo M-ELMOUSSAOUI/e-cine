@@ -1,5 +1,6 @@
 package com.watchme.beans;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,11 +17,21 @@ public class SalleBean {
 
 	public ArrayList<Salle> allsalles;
 	public Salle salle;
+	private Long selectedId;
 	public SalleService salleservice = new SalleService();
 	private Salle salleToUpdate = new Salle();
 	private Salle salleToAdd = new Salle();
 	private boolean editMode = false;
 	private boolean addMode = false;
+	private String data;
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
 
 	public ArrayList<Salle> getAllsalles() {
 		allsalles = salleservice.findAll();
@@ -29,6 +40,15 @@ public class SalleBean {
 
 	public void setAllsalles(ArrayList<Salle> allsalles) {
 		this.allsalles = allsalles;
+	}
+	
+
+	public Long getSelectedId() {
+		return selectedId;
+	}
+
+	public void setSelectedId(Long selectedId) {
+		this.selectedId = selectedId;
 	}
 
 	public Salle getSalle() {
@@ -107,20 +127,21 @@ public class SalleBean {
 		editMode = true;
 	}
 
+	/**
+	    
+	 */
 	public void updateSalle() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-	      Map<String,String> params = 
-	         fc.getExternalContext().getRequestParameterMap();
-	      	Long id =  Long.parseLong(params.get("idToEdit"));
-	      	System.out.println(id);
-	      	salle=salleservice.findById(id);
-				salleservice.update(this.salle);
-				editMode=false;
+			selectedId = Long.parseLong(data);
+		System.out.println(selectedId);
+	     salle=salleservice.findById(selectedId);
+		salleservice.update(this.salle);
+		editMode=false;
 	}
 	public void delete(Long id) {
 
 		salleservice.deleteById(id);
 		allsalles = (ArrayList<Salle>) salleservice.findAll();
 	}
+
 
 }
