@@ -1,9 +1,11 @@
 package com.watchme.beans;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.watchme.models.Salle;
 import com.watchme.service.SalleService;
@@ -79,11 +81,7 @@ public class SalleBean {
 		this.addMode = addMode;
 	}
 
-	public void updateSalle() {
-		salleservice.update(salleToUpdate);
-
-		editMode = false;
-	}
+	
 
 	public void cancelUpdate() {
 		editMode = false;
@@ -109,9 +107,19 @@ public class SalleBean {
 		editMode = true;
 	}
 
-	public void deleteSelectedProdt() {
+	public void updateSalle() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+	      Map<String,String> params = 
+	         fc.getExternalContext().getRequestParameterMap();
+	      	Long id =  Long.parseLong(params.get("idToEdit"));
+	      	System.out.println(id);
+	      	salle=salleservice.findById(id);
+				salleservice.update(this.salle);
+				editMode=false;
+	}
+	public void delete(Long id) {
 
-		salleservice.deleteById(salleToUpdate.getId());
+		salleservice.deleteById(id);
 		allsalles = (ArrayList<Salle>) salleservice.findAll();
 	}
 

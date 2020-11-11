@@ -28,7 +28,7 @@
 									<th>ID</th>
 									<th>Numero</th>
 									<th>Nombre de place</th>
-
+									<th>Actions</th>
 
 
 
@@ -39,6 +39,7 @@
 									<th>ID</th>
 									<th>Numero</th>
 									<th>Nombre de place</th>
+									<th>Actions</th>
 
 
 
@@ -50,7 +51,15 @@
 										<td>${s.id}</td>
 										<td>${s.numero}</td>
 										<td>${s.nombrePlace }</td>
-
+										<td><h:commandButton class="btn btn-danger"
+												action="#{salles.delete(s.id)}"
+												value="delete"
+												onclick="return confirm('Are you sure to delete product?')">
+											</h:commandButton> 
+											<h:commandButton class="btn btn-warning" id="editSalle"
+												action="#{salles.edit}" value="Edit">
+												<f:param name = "idToEdit" value = "${s.id}" /> 
+											</h:commandButton></td>
 
 
 									</tr>
@@ -68,7 +77,7 @@
 		</div>
 		<!-- Ajouter salle-->
 
-		<h:form class="user" rendered="#{salles.addMode}">
+		<h:form class="user"  id="formNew" rendered="#{salles.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Produits</h6>
@@ -90,7 +99,7 @@
 								</h:inputText>
 							</div>
 							<div class="col-sm-6">
-								<h:outputLabel value="Numero" for="Numero" />
+								<h:outputLabel value="Numero" for="numero" />
 								<h:inputText type="text" value="#{salles.salleToAdd.numero}"
 									class="form-control form-control-user" id="numero"
 									placeholder="Numero">
@@ -98,14 +107,18 @@
 								</h:inputText>
 							</div>
 						</div>
-							<div class="col-sm-2">
-						<p:commandButton id="btn_cancelAdd" value="Annuler"
-							action="#{salles.cancelAdd}" class="btn btn-danger " immediate="true"
-							ajax="false" />
-						<h:commandButton value="Ajouter une salle"
-							action="#{salles.addSalle()}"
-							class="btn btn-secondary " />
+						<div class="row">
+							<div class="col">
+								<h:commandButton id="btn_cancelAdd" value="Annuler"
+									action="#{salles.cancelAdd}" class="btn btn-danger disabled"
+									immediate="true" ajax="false" />
 							</div>
+
+							<div class="col">
+								<h:commandButton value="Ajouter une salle"
+									action="#{salles.addSalle()}" class="btn btn-secondary active " />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -116,6 +129,62 @@
 
 
 		<!-- FIN D AJOUT -->
+				<!-- Update salle-->
+
+		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Produits</h6>
+				</div>
+				<div class="card-body">
+
+					<div class="p-5">
+						<div class="text-center">
+							<h1 class="h4 text-gray-900 mb-4">Modifier un produit</h1>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								<h:outputLabel value="Nombre de place:" for="nombrePlaceEdit" />
+								<h:inputText type="number"
+									value="#{salles.salle.nombrePlace}"
+									class="form-control form-control-user" id="nombrePlaceEdit"
+									placeholder="Nombre de place">
+									<f:validateRequired />
+								</h:inputText>
+							</div>
+							<div class="col-sm-6">
+								<h:outputLabel value="Numero" for="numeroEdit" />
+								<h:inputText type="text" value="#{salles.salle.numero}"
+									class="form-control form-control-user" id="numeroEdit"
+									placeholder="Numero">
+									<f:validateRequired />
+								</h:inputText>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<h:commandButton id="btn_cancelEdit" value="Annuler"
+									action="#{salles.cancelEdit}" class="btn btn-danger disabled"
+									immediate="true" ajax="false" />
+							</div>
+
+							<div class="col">
+								<h:commandButton value="Modifier"
+									action="#{salles.updateSalle()}" class="btn btn-secondary active " />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+
+
+
+
+
+		<!-- FIN D update -->
+		
+		
 	</ui:define>
 </ui:composition>
 
