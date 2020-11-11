@@ -11,13 +11,6 @@
         <param-value>server</param-value>
     </context-param>
 	
-	
-	
-	
-	
-	
-	
-	
     <!-- JSF --><!-- LAST CHANGE -->
     <context-param>
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
@@ -38,6 +31,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>index.jsf</welcome-file>
+        <welcome-file>salles.jsf</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -6,18 +6,21 @@ import java.util.List;
 
 
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 
 @Entity
-public class Salle  extends AbstractModel<Long> implements Serializable {
+public class Salle   implements Serializable {
 
-	/**
-	 * 
-	 */
+	
+	
 	private static final long serialVersionUID = 1L;
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private Integer numero;
 	private Integer nombrePlace;
 	//bi-directional one-to-many association to Programme
@@ -33,13 +36,20 @@ public class Salle  extends AbstractModel<Long> implements Serializable {
 
 	public Salle() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	// Getters and Setters
 
 	public Integer getNumero() {
 		return numero;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setNumero(Integer numero) {

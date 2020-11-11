@@ -11,16 +11,13 @@ import javax.persistence.JoinColumn ;
 @Entity 
 public class Acteur extends Artiste {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
     private String role;
 	// bi-directional many-to-many association to Film
 	@ManyToMany
 	@JoinTable(
-			name = "Films_Acteurs_Associations" ,
+			  name = "Films_Acteurs_Associations" ,
 			  joinColumns = @JoinColumn(name = "id_Acteur"), 
 			  inverseJoinColumns = @JoinColumn(name = "id_Film"))
 	private List<Film> films;
