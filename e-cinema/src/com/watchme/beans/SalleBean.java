@@ -1,12 +1,9 @@
 package com.watchme.beans;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import com.watchme.models.Salle;
 import com.watchme.service.SalleService;
@@ -115,8 +112,8 @@ public class SalleBean {
 
 		// salleToAdd.setCategorie(categorieservice.findById(idCategorie));
 		salleservice.save(salleToAdd);
-
-		addMode = false;
+		salleToAdd=new Salle();
+		addMode = false;	
 	}
 
 	public void cancelAdd() {
@@ -125,16 +122,17 @@ public class SalleBean {
 
 	public void edit() {
 		editMode = true;
+		selectedId = Long.parseLong(data);
+	     salleToUpdate=salleservice.findById(selectedId);
+	     System.err.println(salleToAdd.getNombrePlace());
 	}
 
 	/**
 	    
 	 */
 	public void updateSalle() {
-			selectedId = Long.parseLong(data);
-		System.out.println(selectedId);
-	     salle=salleservice.findById(selectedId);
-		salleservice.update(this.salle);
+	
+		salleservice.update(this.salleToUpdate);
 		editMode=false;
 	}
 	public void delete(Long id) {

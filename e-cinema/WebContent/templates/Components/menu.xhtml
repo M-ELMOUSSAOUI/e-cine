@@ -13,16 +13,19 @@
 	<a
 		class="sidebar-brand d-flex align-items-center justify-content-center"
 		href="redirect">
+	
 
-		<div class="sidebar-brand-text mx-3">Gestion du cinéma / WATCH
+		<div class="sidebar-brand-text mx-2"><br/>Gestion du cinéma - WATCH
 			ME</div>
 	</a>
 
 	<!-- Divider -->
+<p> </p>
+
 	<hr class="sidebar-divider my-0" />
 
 	<!-- Nav Item - Dashboard -->
-	<li class="nav-item active"><a class="nav-link" href="index.xhtml">
+	<li class="nav-item active"><a class="nav-link"  href="./views/admin/dashBoard.jsf">
 			<i class="fas fa-fw fa-users"></i> <span>Administrateurs</span>
 	</a></li>
 
@@ -35,15 +38,17 @@
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-		aria-controls="collapseTwo"> <i class="fas fa-fw fa-table"></i> <span>Cinéma</span>
+		aria-controls="collapseTwo"> <i class="fas fa-fw fa-table"></i> <span>Gestion des film</span>
 	</a>
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Produits:</h6>
+				<h6 class="collapse-header">Détails</h6>
 
-				<a class="collapse-item" href="./views/salles.jsf"> Salle</a> <a
-					class="collapse-item" href="ProduitAppro.xhtml">Approvisionnement</a>
+				<a class="collapse-item" href="./views/admin/salles.jsf"> Films</a> 
+				<a class="collapse-item" href="./views/admin/genre.jsf">Genre</a>
+					<a class="collapse-item" href="./views/admin/acteurs.jsf"> Acteurs</a>
+						<a class="collapse-item" href="./views/admin/realisateur.jsf"> Réalisateurs</a>
 
 			</div>
 		</div></li>
@@ -52,13 +57,15 @@
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#collapseUtilities"
 		aria-expanded="true" aria-controls="collapseUtilities"> <i
-			class="fas fa-fw fa-list"></i> <span>Commandes</span>
+			class="fas fa-fw fa-list"></i> <span>Gestion du Programme</span>
 	</a>
 		<div id="collapseUtilities" class="collapse"
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Commandes:</h6>
-				<a class="collapse-item" href="commandes.xhtml">Effectuées</a>
+				<h6 class="collapse-header">Nos programmes:</h6>
+				<a class="collapse-item"  href="./views/admin/programme.jsf">Programme</a>
+				<a class="collapse-item"  href="./views/admin/seances.jsf">Séance</a>
+				<a class="collapse-item" href="./views/admin/salles.jsf">Salle</a>
 
 			</div>
 		</div></li>

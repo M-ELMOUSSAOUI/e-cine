@@ -2,6 +2,7 @@ package com.watchme.beans;
 
 
 
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -85,5 +86,23 @@ public class AdminBean {
 		session.invalidate();
 		return "login";
 	}
+	 public void isLoggedIn() {
+	       
+	        FacesContext facesContext = FacesContext.getCurrentInstance();
+	        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+	       
+	        Object loggedIn = session.getAttribute("username");
+	        System.err.println(loggedIn);
+	        if(loggedIn == null) {
+	            ConfigurableNavigationHandler nav
+	               = (ConfigurableNavigationHandler)
+	                       facesContext.getApplication().getNavigationHandler();
+	 System.out.println("user is null redirect to login");
+	            nav.performNavigation("/login");
+	        } else {
+	            // Display dashboard.xhtml
+	           
+	        }
+	    }
 	
 }

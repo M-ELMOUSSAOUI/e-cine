@@ -5,11 +5,17 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <f:view contentType="text/html">
+<f:metadata>
+        <f:event listener="#{adminBean.isLoggedIn()}" type="preRenderView"></f:event>
+    </f:metadata>
 	<h:head>
 		<f:facet name="first">
 		<ui:include src="templates/Components/head.xhtml" />
 		</f:facet>
+		
 	</h:head>
+
+
 	<h:body id="page-top">
 		
 		
@@ -27,10 +33,7 @@
 			<div id="content">
 
 				<!-- Topbar -->
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-			</nav>
+				<ui:include src="templates/Components/header.xhtml" />
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
