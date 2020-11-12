@@ -1,6 +1,7 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
 	<ui:define name="contenu">
 
@@ -28,7 +29,7 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Date de début</th>
+									<th>Date de debut</th>
 									<th>Date du fin</th>
 									<th>Actions</th>
 
@@ -39,7 +40,7 @@
 							<tfoot>
 								<tr>
 									<th>ID</th>
-									<th>Date de début</th>
+									<th>Date de debut</th>
 									<th>Date du fin</th>
 									<th>Actions</th>
 
@@ -49,7 +50,7 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								<ui:repeat value="${salles.allprogrammes}" var="p">
+								<ui:repeat value="${programmes.allprogrammes}" var="p">
 									<tr>
 										<td>${p.id}</td>
 										<td>${p.dateDebut}</td>
@@ -58,7 +59,7 @@
 											<div align="center">
 												<h:commandButton class="btn btn-danger"
 													action="#{programmes.delete(p.id)}" value="delete"
-													onclick="return confirm('Etes-vous sûr de vouloir supprimer ce programme?')">
+													onclick="return confirm('Etes-vous sur de vouloir supprimer ce programme?')">
 												</h:commandButton>
 												<h:commandButton style="margin-left:20px"
 													class="btn btn-warning" id="editProgramme"
@@ -129,7 +130,7 @@
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Ajouter une salle"
+								<h:commandButton value="Ajouter un programme"
 									action="#{programmes.addProgramme()}"
 									class="btn btn-secondary active " />
 							</div>
@@ -146,7 +147,7 @@
 		<!-- FIN D AJOUT -->
 		<!-- Update Programme-->
 
-		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
+		<h:form class="user" id="formEdit" rendered="#{programmes.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des

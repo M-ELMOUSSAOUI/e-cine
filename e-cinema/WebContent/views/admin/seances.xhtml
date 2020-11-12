@@ -1,6 +1,7 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:p="http://xmlns.jcp.org/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
 	<ui:define name="contenu">
 
@@ -27,7 +28,7 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Heure de début</th>
+									<th>Heure de debut</th>
 									<th>Heure du fin</th>
 									<th>Date du projection</th>
 									<th>Film</th>
@@ -41,7 +42,7 @@
 							<tfoot>
 								<tr>
 									<th>ID</th>
-									<th>Heure de début</th>
+									<th>Heure de debut</th>
 									<th>Heure du fin</th>
 									<th>Date du projection</th>
 									<th>Film</th>
@@ -66,13 +67,14 @@
 											<div align="center">
 												<h:commandButton class="btn btn-danger"
 													action="#{seances.delete(s.id)}" value="delete"
-													onclick="return confirm('Etes-vous sûr de vouloir supprimer cette seance?')">
+													onclick="return confirm('Etes-vous sur de vouloir supprimer cette seance?')">
 												</h:commandButton>
 												<h:commandButton style="margin-left:20px"
 													class="btn btn-warning" id="editSeance"
 													action="#{seances.edit}" value="Edit">
 													<f:setPropertyActionListener target="#{seances.data}"
 														value="${s.id}" />
+														</h:commandButton>
 												
 											</div>
 
@@ -94,7 +96,7 @@
 		</div>
 		<!-- Ajouter programme-->
 
-		<h:form class="user" id="formNew" rendered="#{programmes.addMode}">
+		<h:form class="user" id="formNew" rendered="#{seances.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des Seances</h6>
@@ -109,10 +111,10 @@
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
 								<h:outputLabel value="Heure de debut :" for="time-input" />
-								<h:inputText type="time"
+								<h:inputText a:type="time"
 									value="#{seances.seanceToAdd.heureDebut}"
 									class="form-control " id="dateDebut">
-									<f:convertTime pattern="HH-MM" />
+									<f:convertDateTime pattern="HH-MM" />
 									<f:validateRequired />
 								</h:inputText>
 
@@ -132,20 +134,24 @@
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
 								<!-- select -->
-											<h:outputLabel value="Titre du film" for="film" />
-											<p:selectOneMenu filter="true" class="form-control "  required="true"
-												id="film" value="#{seances.filmId}">
-												<f:selectItems value="#{seances.listFilms}"
+											<h:outputLabel value="Titre du film :" for="film" />
+											<p:selectOneMenu filter="true" class="form-control"   required="true"
+												id="film" value="#{seances.idFilm}">
+												<f:selectItem itemLabel="Select One" itemValue="#{null}"
+										noSelectionOption="true" />
+												<f:selectItems itemvalue="#{seances.allfilms}"
 													var="film" itemLabel="#{film.titre}"
 													itemValue="#{film.id}" />
 											</p:selectOneMenu>
 
 							</div>
 							<div class="col-sm-6">
-									<h:outputLabel value="Titre du film" for="salle" />
+									<h:outputLabel value="Numero de salle :" for="salle" />
 											<p:selectOneMenu filter="true" class="form-control "  required="true"
-												id="salle" value="#{seances.salleId}">
-												<f:selectItems value="#{seances.listSalles}"
+												id="salle" value="#{seances.idSalle}">
+													<f:selectItem itemLabel="Select One" itemValue="#{null}"
+										noSelectionOption="true" />
+												<f:selectItems value="#{seances.allSalles}"
 													var="salle" itemLabel="#{salle.numero}"
 													itemValue="#{salle.id}" />
 											</p:selectOneMenu>
@@ -155,13 +161,13 @@
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelAdd" value="Annuler"
-									action="#{programmes.cancelAdd}"
+									action="#{seances.cancelAdd}"
 									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
 								<h:commandButton value="Ajouter une salle"
-									action="#{programmes.addProgramme()}"
+									action="#{seances.addSeance()}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -177,7 +183,7 @@
 		<!-- FIN D AJOUT -->
 		<!-- Update Programme-->
 
-		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
+		<h:form class="user" id="formEdit" rendered="#{seances.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des Seances</h6>
@@ -186,39 +192,64 @@
 
 					<div class="p-5">
 						<div class="text-center">
-							<h1 class="h4 text-gray-900 mb-4">Modifier un programme</h1>
+							<h1 class="h4 text-gray-900 mb-4">Modifier une seance</h1>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
-								<h:outputLabel value="Date de debut :" for="dateDebutEdit" />
-								<h:inputText a:type="date"
-									value="#{programmes.programmeToUpdate.dateDebut}"
-									class="form-control " id="dateDebutEdit">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
+
+								<h:outputLabel value="Heure de debut :" for="time-input" />
+								<h:inputText type="time"
+									value="#{seances.seanceToUpdate.heureDebut}"
+									class="form-control " id="dateDebut">
+									<f:convertDateTime pattern="HH-MM" />
 									<f:validateRequired />
 								</h:inputText>
 
 							</div>
 							<div class="col-sm-6">
-								<h:outputLabel value="Date du Fin :" for="dateFinEdit" />
+								<h:outputLabel value="Date du Projection :" for="dateProjection" />
 								<h:inputText a:type="date"
-									value="#{programmes.programmeToUpdate.dateFin}"
-									class="form-control " id="dateFinEdit">
+									value="#{seances.seanceToUpdate.dateProjection}"
+									class="form-control " id="dateProjection">
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 									<f:validateRequired />
 								</h:inputText>
+
+							</div>
+						</div>
+							<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								<!-- select -->
+											<h:outputLabel value="Titre du film" for="film" />
+											<p:selectOneMenu filter="true" class="form-control "  required="true"
+												id="film" value="#{seances.idFilm}">
+												<f:selectItems value="#{seances.allfilms}"
+													var="film" itemLabel="#{film.titre}"
+													itemValue="#{film.id}" />
+											</p:selectOneMenu>
+
+							</div>
+							<div class="col-sm-6">
+									<h:outputLabel value="Titre du film" for="salle" />
+											<p:selectOneMenu filter="true" class="form-control "  required="true"
+												id="salle" value="#{seances.idSalle}">
+												<f:selectItems value="#{seances.allSalles}"
+													var="salle" itemLabel="#{salle.numero}"
+													itemValue="#{salle.id}" />
+											</p:selectOneMenu>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelEdit" value="Annuler"
-									action="#{programmes.cancelUpdate}"
+									action="#{seances.cancelUpdate}"
 									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
 								<h:commandButton value="Modifier"
-									action="#{programmes.updateProgramme}"
+									action="#{seances.updateProgramme}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
