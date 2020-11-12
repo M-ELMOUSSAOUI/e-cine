@@ -80,11 +80,8 @@ public class AdminBean {
 			}
 			
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
+			System.err.println("error in login");
+			this.showMessage();
 		}
 	}
 	
@@ -119,4 +116,11 @@ public class AdminBean {
 	        }
 	    }
 	
+	public void showMessage() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Error",
+						"username or password incorrect"));
+	}
 }

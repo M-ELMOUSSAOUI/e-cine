@@ -14,7 +14,8 @@
 			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
 			name="viewport" />
 		<!-- Bootstrap 3.3.6 -->
-		<link rel="stylesheet" href="#{request.contextPath}/templates/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet"
+			href="#{request.contextPath}/templates/bootstrap/css/bootstrap.min.css" />
 		<!-- Font Awesome -->
 		<link rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -22,9 +23,11 @@
 		<link rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
 		<!-- Theme style -->
-		<link rel="stylesheet" href="#{request.contextPath}/templates/dist/css/AdminLTE.min.css" />
+		<link rel="stylesheet"
+			href="#{request.contextPath}/templates/dist/css/AdminLTE.min.css" />
 		<!-- iCheck -->
-		<link rel="stylesheet" href="#{request.contextPath}/templates/plugins/iCheck/square/blue.css" />
+		<link rel="stylesheet"
+			href="#{request.contextPath}/templates/plugins/iCheck/square/blue.css" />
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,54 +39,62 @@
 	<body class="hold-transition login-page">
 		<div class="login-box">
 			<div class="login-logo">
-				<b>WATCH ME </b>   Admin
+				<b>WATCH ME </b> Admin
 			</div>
 			<!-- /.login-logo -->
 			<div class="login-box-body">
-				<p class="login-box-msg"><b>Login </b></p>
+				<p class="login-box-msg">
+					<b>Login </b>
+				</p>
 
-				
 
-				<h:form method="post">
+
+				<h:form id="loginForn" method="post">
 					<div class="form-group has-feedback">
-					
-						<h:outputText value="Username :" />
-					
-						<h:inputText id="username" type="text" class="form-control"
-							name="username" placeholder="username" escape="false"
-							value="#{adminBean.username}">
-								<span class="glyphicon glyphicon-user form-control-feedback"></span>
-							</h:inputText>
 
-						<h:message for="username"></h:message>
-						
+						<h:outputText value="Username :" />
+
+						<h:inputText id="username" type="text" class="form-control"
+							name="username" placeholder="username" escape="false" 
+							value="#{adminBean.username}">
+							<span class="glyphicon glyphicon-user form-control-feedback"></span>
+						</h:inputText>
+
+
 					</div>
 					<div class="form-group has-feedback">
 						<h:outputText value="Password :" />
 						<h:inputSecret id="password" class="form-control" name="password"
-							placeholder="password" value="#{adminBean.password}">
-<!-- 							<span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
-							</h:inputSecret>
-						<h:message for="password"></h:message>
+							 placeholder="password"
+							 
+							value="#{adminBean.password}"/>
+							<!--<span class="glyphicon glyphicon-lock form-control-feedback"></span> -->
 						
 					</div>
 					<div class="row">
 						<div class="col-xs-4">
-						<h:commandButton class="btn btn-primary btn-block btn-flat" action="#{adminBean.validateUsernamePassword}"
-			value="Login"></h:commandButton>
-							
+							<p:commandButton id="login"
+								class="btn btn-primary btn-block btn-flat"
+								action="#{adminBean.validateUsernamePassword}" value="Login">
+							</p:commandButton>
 						</div>
 					</div>
+					<p:messages  id="messages" showDetail="true" closable="true">
+						<p:autoUpdate />
+					</p:messages>
 				</h:form>
 			</div>
 		</div>
 
 		<!-- jQuery 2.2.0 -->
-		<script src="#{request.contextPath}/templates/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+		<script
+			src="#{request.contextPath}/templates/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 		<!-- Bootstrap 3.3.6 -->
-		<script src="#{request.contextPath}/templates/bootstrap/js/bootstrap.min.js"></script>
+		<script
+			src="#{request.contextPath}/templates/bootstrap/js/bootstrap.min.js"></script>
 		<!-- iCheck -->
-		<script src="#{request.contextPath}/templates/plugins/iCheck/icheck.min.js"></script>
+		<script
+			src="#{request.contextPath}/templates/plugins/iCheck/icheck.min.js"></script>
 		<script>
 			$(function() {
 				$('input').iCheck({
@@ -94,5 +105,5 @@
 			});
 		</script>
 	</body>
-	</f:view>
+</f:view>
 </html>
