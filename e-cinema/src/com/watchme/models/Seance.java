@@ -29,24 +29,27 @@ public class Seance implements Serializable {
 	private Date heureFin;
 	@Temporal(TemporalType.DATE)
 	private Date dateProjection;
+	private Boolean activate ;
 	@OneToOne
 	private Salle salle;
 	@OneToOne
 	private Film film;
 
 	// Constructors
-	public Seance(Date heureDebut, Date heureFin, Date dateProjection, Salle salle, Film film) {
-		super();
-		this.heureDebut = heureDebut;
-		this.heureFin = heureFin;
-		this.dateProjection = dateProjection;
-		this.salle = salle;
-		this.film = film;
-	}
 
 	public Seance() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Seance(Date heureDebut, Date heureFin, Date dateProjection, Boolean activate, Salle salle, Film film) {
+		super();
+		this.heureDebut = heureDebut;
+		this.heureFin = heureFin;
+		this.dateProjection = dateProjection;
+		this.activate = activate;
+		this.salle = salle;
+		this.film = film;
 	}
 
 	// Getters and setters
@@ -96,6 +99,14 @@ public class Seance implements Serializable {
 
 	public void setFilm(Film film) {
 		this.film = film;
+	}
+
+	public Boolean getActivate() {
+		return activate;
+	}
+
+	public void setActivate(Boolean activate) {
+		this.activate = activate;
 	}
 
 }
