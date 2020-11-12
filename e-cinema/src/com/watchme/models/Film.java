@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.mysql.cj.jdbc.Blob;
+import java.sql.Blob;
 
 
 @Entity
