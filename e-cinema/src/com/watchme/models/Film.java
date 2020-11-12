@@ -1,6 +1,7 @@
 package com.watchme.models;
 
 import java.io.Serializable;
+
 import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+import java.sql.Blob;
 
 
 

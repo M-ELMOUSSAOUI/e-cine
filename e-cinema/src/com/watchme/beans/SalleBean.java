@@ -140,6 +140,11 @@ public class SalleBean {
 		salleservice.deleteById(id);
 		allsalles = (ArrayList<Salle>) salleservice.findAll();
 	}
+	
+	// Count number of Salles
+		public int count() {
+			return salleservice.findAll().size();
+		}
 
 
 }
