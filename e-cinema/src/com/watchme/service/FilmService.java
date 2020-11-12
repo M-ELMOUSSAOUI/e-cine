@@ -30,7 +30,6 @@ public class FilmService {
     		 film.setDuree(f.getDuree());
     		 film.setFiche(f.getFiche());
     		 film.setGenre(f.getGenre());
-    		 film.setPhoto(f.getPhoto());
     		 film.setRealisateur(f.getRealisateur());
     		 film.setTitre(f.getTitre());
     		 films.add(film);

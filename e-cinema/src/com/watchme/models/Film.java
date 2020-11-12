@@ -1,6 +1,7 @@
 package com.watchme.models;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.mysql.cj.jdbc.Blob;
+
 
 @Entity
 public class Film implements Serializable {
@@ -26,10 +30,9 @@ public class Film implements Serializable {
 	private Long id;
 	private String titre;
 	private Double duree;
-	private String photo;
 	private String description;
 	private Date datederealisation;
-	private String fiche;
+	private Blob fiche;
 
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -48,12 +51,12 @@ public class Film implements Serializable {
 
 	}
 
-	public Film(String titre, Double duree, String photo, String description, Date datederealisation, String fiche,
+	public Film(String titre, Double duree, String description, Date datederealisation, Blob fiche,
 			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
 		super();
 		this.titre = titre;
 		this.duree = duree;
-		this.photo = photo;
+		
 		this.description = description;
 		this.datederealisation = datederealisation;
 		this.fiche = fiche;
@@ -89,13 +92,6 @@ public class Film implements Serializable {
 		this.duree = duree;
 	}
 
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
 
 	public String getDescription() {
 		return description;
@@ -113,11 +109,11 @@ public class Film implements Serializable {
 		this.datederealisation = datederealisation;
 	}
 
-	public String getFiche() {
+	public Blob getFiche() {
 		return fiche;
 	}
 
-	public void setFiche(String fiche) {
+	public void setFiche(Blob fiche) {
 		this.fiche = fiche;
 	}
 
