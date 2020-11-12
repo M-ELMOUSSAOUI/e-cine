@@ -36,9 +36,9 @@ public class ActeurService {
 	}
 
 	// get acteur by id
-	public Acteur findById(Long id) {
+	public List<Acteur> findById(Long id) {
 
-		return em.find(Acteur.class, id);
+		return (List<Acteur>) em.find(Acteur.class, id);
 	}
 
 	// insert new acteur in table
