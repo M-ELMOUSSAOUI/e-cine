@@ -15,8 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
-import java.sql.Blob;
-
 
 @Entity
 public class Film implements Serializable {

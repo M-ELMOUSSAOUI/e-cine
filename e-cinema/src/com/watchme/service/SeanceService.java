@@ -30,6 +30,7 @@ public class SeanceService {
 			seance.setHeureDebut(a.getHeureDebut());
 			seance.setHeureFin(a.getHeureFin());
 			seance.setSalle(a.getSalle());
+			seance.setActivate(a.getActivate());
 			seances.add(seance);
 		}
 		return seances;

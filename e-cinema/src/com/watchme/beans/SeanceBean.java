@@ -5,23 +5,42 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import com.watchme.models.Film;
+import com.watchme.models.Salle;
 import com.watchme.models.Seance;
+import com.watchme.service.FilmService;
+import com.watchme.service.SalleService;
 import com.watchme.service.SeanceService;
 
 @ManagedBean(name = "seances", eager = true)
 @SessionScoped
 public class SeanceBean {
 
-	public ArrayList<Seance> allseance;
+	public Long idFilm ;
+	private long idSalle ; 
+	public ArrayList<Seance> allseances;
+	public ArrayList<Film> allfilms ;
+	public ArrayList<Salle> allSalles ;
 	public Seance seance;
 	private Long selectedId;
 	public SeanceService seanceservice = new SeanceService();
+	public FilmService filmService = new FilmService();
+	public SalleService salleService = new SalleService();
 	private Seance seanceToUpdate = new Seance();
 	private Seance seanceToAdd = new Seance();
 	private boolean editMode = false;
 	private boolean addMode = false;
 	private String data;
 
+	
+	public ArrayList<Film> getAllfilms() {
+		allfilms = (ArrayList<Film>) filmService.findAll();
+		return allfilms;
+	}
+
+	public void setAllfilms(ArrayList<Film> allfilms) {
+		this.allfilms = allfilms;
+	}
 	public void cancelUpdate() {
 		editMode = false;
 	}
@@ -33,6 +52,8 @@ public class SeanceBean {
 	public void addSalle() {
 
 		// salleToAdd.setCategorie(categorieservice.findById(idCategorie));
+		seanceToAdd.setSalle(salleService.findById(this.idSalle));
+		seanceToAdd.setFilm(filmService.findById(this.idFilm));
 		seanceservice.save(seanceToAdd);
 		seanceToAdd = new Seance();
 		addMode = false;
@@ -61,7 +82,7 @@ public class SeanceBean {
 	public void delete(Long id) {
 
 		seanceservice.deleteById(id);
-		allseance = (ArrayList<Seance>) seanceservice.findAll();
+		allseances = (ArrayList<Seance>) seanceservice.findAll();
 	}
 	
 	
@@ -70,13 +91,13 @@ public class SeanceBean {
 				return seanceservice.findAll().size();
 			}
 
-	public ArrayList<Seance> getAllseance() {
-		allseance = (ArrayList<Seance>) seanceservice.findAll();
-		return allseance;
+	public ArrayList<Seance> getAllseances() {
+		allseances = (ArrayList<Seance>) seanceservice.findAll();
+		return allseances;
 	}
 
-	public void setAllseance(ArrayList<Seance> allseance) {
-		this.allseance = allseance;
+	public void setAllseances(ArrayList<Seance> allseance) {
+		this.allseances = allseance;
 	}
 
 	public Seance getSeance() {
@@ -133,6 +154,47 @@ public class SeanceBean {
 
 	public void setAddMode(boolean addMode) {
 		this.addMode = addMode;
+	}
+
+	public Long getIdFilm() {
+		return idFilm;
+	}
+
+	public void setIdFilm(Long idFilm) {
+		this.idFilm = idFilm;
+	}
+
+	public FilmService getFilmService() {
+		return filmService;
+	}
+
+	public void setFilmService(FilmService filmService) {
+		this.filmService = filmService;
+	}
+
+	public long getIdSalle() {
+		return idSalle;
+	}
+
+	public void setIdSalle(long idSalle) {
+		this.idSalle = idSalle;
+	}
+
+	public ArrayList<Salle> getAllSalles() {
+		allSalles = salleService.findAll();
+		return allSalles;
+	}
+
+	public void setAllSalles(ArrayList<Salle> allSalles) {
+		this.allSalles = allSalles;
+	}
+
+	public SalleService getSalleService() {
+		return salleService;
+	}
+
+	public void setSalleService(SalleService salleService) {
+		this.salleService = salleService;
 	}
 
 	public String getData() {
