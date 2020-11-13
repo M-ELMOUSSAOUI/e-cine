@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
+import java.sql.Blob;
 
 
 @Entity
@@ -32,7 +33,7 @@ public class Film implements Serializable {
 	private Double duree;
 	private String description;
 	private Date datederealisation;
-	private Blob fiche;
+	private String fiche;
 
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -51,7 +52,8 @@ public class Film implements Serializable {
 
 	}
 
-	public Film(String titre, Double duree, String description, Date datederealisation, Blob fiche,
+	public Film(String titre, Double duree, String description, Date datederealisation, 
+			String fiche,
 			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
 		super();
 		this.titre = titre;
@@ -109,11 +111,12 @@ public class Film implements Serializable {
 		this.datederealisation = datederealisation;
 	}
 
-	public Blob getFiche() {
+
+	public String getFiche() {
 		return fiche;
 	}
 
-	public void setFiche(Blob fiche) {
+	public void setFiche(String fiche) {
 		this.fiche = fiche;
 	}
 

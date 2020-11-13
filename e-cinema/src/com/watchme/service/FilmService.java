@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.watchme.models.Film;
+import com.watchme.models.Membre;
 
 public class FilmService {
 
@@ -29,9 +30,10 @@ public class FilmService {
     		 film.setDescription(f.getDescription());
     		 film.setDuree(f.getDuree());
     		 film.setFiche(f.getFiche());
+    		 film.setTitre(f.getTitre());
     		 film.setGenre(f.getGenre());
     		 film.setRealisateur(f.getRealisateur());
-    		 film.setTitre(f.getTitre());
+    		
     		 films.add(film);
 
 		  }
@@ -46,6 +48,14 @@ public class FilmService {
 		return film;
 	}
 
+	public Film findById(long id) {
+		entityManager.getTransaction().begin();
+		Film film = entityManager.find(Film.class, id);
+		System.out.println(film);
+		entityManager.getTransaction().commit();
+		return film;
+	}
+	
 	public void add(Film film) {
 		entityManager.getTransaction().begin();
 		entityManager.persist(film);

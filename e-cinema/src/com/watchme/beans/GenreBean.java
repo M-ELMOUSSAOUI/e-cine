@@ -54,12 +54,13 @@ public class GenreBean {
 		allgenres = (ArrayList<Genre>) genreservice.findAll();
 	}
 
-	public ArrayList<Genre> getAllGenres() {
+	public ArrayList<Genre> getAllgenres() {
+		
 		allgenres = (ArrayList<Genre>) genreservice.findAll();
 		return allgenres;
 	}
 
-	public void setAllGenres(ArrayList<Genre> allGenres) {
+	public void setAllgenres(ArrayList<Genre> allGenres) {
 		this.allgenres = allGenres;
 	}
 
@@ -125,6 +126,9 @@ public class GenreBean {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+	public void prepareAdd() {
+		addMode = true;
 	}
 
 }

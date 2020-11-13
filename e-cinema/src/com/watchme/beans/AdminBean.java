@@ -2,6 +2,8 @@ package com.watchme.beans;
 
 
 
+import java.io.IOException;
+
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -63,46 +65,62 @@ public class AdminBean {
 	}
 
 
-	public String validateUsernamePassword() {
+	public void validateUsernamePassword() {
 		admin = new Administrateur(username,null, password);
 		boolean valid = as.login(admin);
 		System.out.println(valid);
 		if (valid) {
 			HttpSession session = SessionUtil.getSession();
 			session.setAttribute("username", username);
-			return "admin";
+			try {
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/e-cinema/views/admin/dashBoard.jsf");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
-			return "login";
+			System.err.println("error in login");
+			this.showMessage();
 		}
 	}
 	
-	public String logout() {
+	public void logout() {
 		HttpSession session = SessionUtil.getSession();
 		session.invalidate();
-		return "login";
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		try {
+			facesContext.getExternalContext().redirect("/e-cinema/login.jsf");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	 public void isLoggedIn() {
+	 /**
+	 	            ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) facesContext.getApplication().getNavigationHandler();
+	            System.out.println("user is null redirect to login");
+	            nav.performNavigation("/login");
+	
+	 */
+	public void isLoggedIn() throws IOException {
 	       
 	        FacesContext facesContext = FacesContext.getCurrentInstance();
 	        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
 	       
 	        Object loggedIn = session.getAttribute("username");
-	        System.err.println(loggedIn);
 	        if(loggedIn == null) {
-	            ConfigurableNavigationHandler nav
-	               = (ConfigurableNavigationHandler)
-	                       facesContext.getApplication().getNavigationHandler();
-	 System.out.println("user is null redirect to login");
-	            nav.performNavigation("/login");
+	        	facesContext.getExternalContext().redirect("/e-cinema/login.jsf");
 	        } else {
 	            // Display dashboard.xhtml
 	           
 	        }
 	    }
 	
+	public void showMessage() {
+		FacesContext.getCurrentInstance().addMessage(
+				null,
+				new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Error",
+						"username or password incorrect"));
+	}
 }
