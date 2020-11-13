@@ -17,16 +17,16 @@
 		<class>com.watchme.models.Acteur</class>
 		<class>com.watchme.models.Realisateur</class>
 		<class>com.watchme.models.Film</class>
-		<class>com.watchme.models.Genre   </class>
-		<class>com.watchme.models.Seance  </class>
+		<class>com.watchme.models.Genre</class>
+		<class>com.watchme.models.Seance</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost/cinema" />
+				value="jdbc:mysql://localhost:3305/cinema?serverTimezone=UTC" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="javax.persistence.jdbc.password" value="root" />
 
 			<!-- EclipseLink should create the database schema automatically -->
 			<property name="eclipselink.ddl-generation"
