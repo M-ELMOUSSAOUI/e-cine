@@ -3,6 +3,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
+
 	<ui:define name="contenu">
 
 		<!-- afficher table admins -->
@@ -53,8 +54,12 @@
 								<ui:repeat value="${programmes.allprogrammes}" var="p">
 									<tr>
 										<td>${p.id}</td>
-										<td>${p.dateDebut}</td>
-										<th>${p.dateFin }</th>
+										<td><h:outputText value="#{p.dateDebut}">
+												<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+											</h:outputText></td>
+										<th><h:outputText value="#{p.dateFin}">
+												<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+											</h:outputText></th>
 										<td>
 											<div align="center">
 												<h:commandButton class="btn btn-danger"
@@ -109,7 +114,7 @@
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 									<f:validateRequired />
 								</h:inputText>
-								
+
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Date du Fin :" for="dateFin" />
@@ -119,7 +124,7 @@
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 									<f:validateRequired />
 								</h:inputText>
-								
+
 							</div>
 						</div>
 						<div class="row">
@@ -183,12 +188,13 @@
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelEdit" value="Annuler"
-									action="#{programmes.cancelUpdate}" class="btn btn-danger disabled"
-									immediate="true" ajax="false" />
+									action="#{programmes.cancelUpdate}"
+									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Modifier" action="#{programmes.updateProgramme}"
+								<h:commandButton value="Modifier"
+									action="#{programmes.updateProgramme}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>

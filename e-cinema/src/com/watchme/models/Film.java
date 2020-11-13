@@ -14,9 +14,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import java.sql.Blob;
-
-
 
 @Entity
 public class Film implements Serializable {
@@ -33,12 +30,11 @@ public class Film implements Serializable {
 	private Double duree;
 	private String description;
 	private Date datederealisation;
-	private Blob fiche;
+	private String fiche;
 
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Genre genre;
-
 
 	// bi-directional many-to-many association to Acteur
 	@ManyToMany(mappedBy = "films")
@@ -52,12 +48,12 @@ public class Film implements Serializable {
 
 	}
 
-	public Film(String titre, Double duree, String description, Date datederealisation, Blob fiche,
-			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
+	public Film(String titre, Double duree, String description, Date datederealisation, String fiche, Genre genre,
+			List<Acteur> acteurs, Realisateur realisateur) {
 		super();
 		this.titre = titre;
 		this.duree = duree;
-		
+
 		this.description = description;
 		this.datederealisation = datederealisation;
 		this.fiche = fiche;
@@ -65,8 +61,6 @@ public class Film implements Serializable {
 		this.acteurs = acteurs;
 		this.realisateur = realisateur;
 	}
-
-
 
 	// getter setters
 	public Long getId() {
@@ -93,7 +87,6 @@ public class Film implements Serializable {
 		this.duree = duree;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
@@ -110,11 +103,11 @@ public class Film implements Serializable {
 		this.datederealisation = datederealisation;
 	}
 
-	public Blob getFiche() {
+	public String getFiche() {
 		return fiche;
 	}
 
-	public void setFiche(Blob fiche) {
+	public void setFiche(String fiche) {
 		this.fiche = fiche;
 	}
 
@@ -126,8 +119,6 @@ public class Film implements Serializable {
 		this.genre = genre;
 	}
 
-	
-
 	public List<Acteur> getActeurs() {
 		return acteurs;
 	}
@@ -136,13 +127,9 @@ public class Film implements Serializable {
 		this.acteurs = acteurs;
 	}
 
-
-
 	public Realisateur getRealisateur() {
 		return realisateur;
 	}
-
-
 
 	public void setRealisateur(Realisateur realisateur) {
 		this.realisateur = realisateur;
