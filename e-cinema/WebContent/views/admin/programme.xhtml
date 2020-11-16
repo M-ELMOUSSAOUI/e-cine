@@ -53,7 +53,7 @@
 								<ui:repeat value="${programmes.allprogrammes}" var="p">
 									<tr>
 										<td>${p.id}</td>
-										<td>${p.dateDebut}</td>
+										<td>${DateFormat.SimpleDateFormat("YYYY-MM-DD").format(p.dateDebut)}</td>
 										<th>${p.dateFin }</th>
 										<td>
 											<div align="center">

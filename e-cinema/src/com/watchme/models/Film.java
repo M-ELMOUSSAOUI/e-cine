@@ -30,7 +30,7 @@ public class Film implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	private String titre;
-	private Double duree;
+	private Long duree;
 	private String description;
 	private Date datederealisation;
 	private Blob fiche;
@@ -52,7 +52,7 @@ public class Film implements Serializable {
 
 	}
 
-	public Film(String titre, Double duree, String description, Date datederealisation, Blob fiche,
+	public Film(String titre, Long duree, String description, Date datederealisation, Blob fiche,
 			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
 		super();
 		this.titre = titre;
@@ -85,11 +85,11 @@ public class Film implements Serializable {
 		this.titre = titre;
 	}
 
-	public Double getDuree() {
+	public Long getDuree() {
 		return duree;
 	}
 
-	public void setDuree(Double duree) {
+	public void setDuree(Long duree) {
 		this.duree = duree;
 	}
 

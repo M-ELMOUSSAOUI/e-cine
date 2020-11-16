@@ -1,12 +1,22 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<h:html  xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://xmlns.jcp.org/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
-	<ui:define name="contenu">
+	xmlns:t="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough" 
+	xmlns:f="http://java.sun.com/jsf/core" >
+	
+<h:head></h:head>
+<h:body>
+<ui:composition template="../../index.xhtml">
+
+	<ui:define name="contenu">
+	
 		<!-- afficher table admins -->
 		<div class="card shadow mb-4">
+		
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">Liste des Seances</h6>
 			</div>
@@ -33,6 +43,8 @@
 									<th>Date du projection</th>
 									<th>Film</th>
 									<th>Salle</th>
+									<th>Active</th>
+									<th>Etat</th>
 									<th>Actions</th>
 
 
@@ -47,6 +59,8 @@
 									<th>Date du projection</th>
 									<th>Film</th>
 									<th>Salle</th>
+									<th>Active</th>
+									<th>Etat</th>
 									<th>Actions</th>
 
 
@@ -57,25 +71,39 @@
 								<ui:repeat value="${seances.allseances}" var="s">
 									<tr>
 										<td>${s.id}</td>
-										<td>${s.heureDebut}</td>
-										<td>${s.heureFin}</td>
-										<td>${s.dateProjection}</td>
-										<!-- 										use get	 -->
+										
+										<td><h:outputText value="${s.heureDebut}">
+                                                <f:convertDateTime type="time" pattern="hh-mm" /></h:outputText></td>
+                                                <td><h:outputText value="${s.heureFin}">
+                                                <f:convertDateTime type="time" pattern="hh-mm" /></h:outputText></td>
+										<td><h:outputText value="${s.dateProjection}">
+                                                <f:convertDateTime type="date" pattern="dd-MM-yyyy" /></h:outputText></td>
+					
 										<td>${s.film.titre}</td>
 										<td>${s.salle.numero}</td>
+										<td><h:commandButton action="#{seances.desactiver}"
+												onclick="return confirm('Etes-vous sur de vouloir annuler cette seance du programme?')"
+												class="btn btn-info" value="Desactiver">
+												<f:setPropertyActionListener target="#{seances.data}"
+													value="${s.id}" />
+											</h:commandButton></td>
+											<td>${s.activate}</td>
+<!-- 											<c:if test="${s.activate==true}"><td>Activee </td></c:if> -->
+<!-- 											<c:if test="${s.activate==false}"><td>Desactivee </td></c:if> -->
 										<td>
-											<div align="center">
+											<div align="right">
 												<h:commandButton class="btn btn-danger"
 													action="#{seances.delete(s.id)}" value="delete"
 													onclick="return confirm('Etes-vous sur de vouloir supprimer cette seance?')">
 												</h:commandButton>
+												<br /> <br />
 												<h:commandButton style="margin-left:20px"
 													class="btn btn-warning" id="editSeance"
-													action="#{seances.edit}" value="Edit">
+													action="#{seances.edit}" value="   Edit   ">
 													<f:setPropertyActionListener target="#{seances.data}"
 														value="${s.id}" />
-														</h:commandButton>
-												
+												</h:commandButton>
+
 											</div>
 
 										</td>
@@ -88,7 +116,7 @@
 
 
 							</tbody>
-						</table>
+					</table> 
 					</div>
 				</h:form>
 			</div>
@@ -96,10 +124,11 @@
 		</div>
 		<!-- Ajouter programme-->
 
-		<h:form class="user" id="formNew" rendered="#{seances.addMode}">
+		<h:form enctype="multipart/form-data" class="user" id="formNew" rendered="#{seances.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des Seances</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						Seances</h6>
 				</div>
 				<div class="card-body">
 
@@ -107,68 +136,82 @@
 						<div class="text-center">
 							<h1 class="h4 text-gray-900 mb-4">Ajouter une seance</h1>
 						</div>
+						
+						<div class="form-group row">
+							<div class="col">
+
+								<!-- select -->
+								<h:outputLabel value="Programme :" for="programme" />
+								<t:selectOneMenu filter="true" class="form-control"
+									required="true" id="programme" value="#{seances.idProgramme}">
+<!-- 									<f:selectItem itemLabel="Select Programme" itemValue="#{null}" -->
+<!-- 										noSelectionOption="true" /> -->
+									<f:selectItems value="#{seances.allprogrammes}" var="programme"
+										itemLabel="#{programme.dateDebut} -- #{programme.dateFin} " itemValue="#{programme.id}" />
+								</t:selectOneMenu>
+
+							</div>
+							</div>
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
-								<h:outputLabel value="Heure de debut :" for="time-input" />
+								<h:outputLabel value="Heure de debut :" for="time" />
 								<h:inputText a:type="time"
-									value="#{seances.seanceToAdd.heureDebut}"
-									class="form-control " id="dateDebut">
-									<f:convertDateTime pattern="HH-MM" />
+									value="#{seances.seanceToAdd.heureDebut}" class="form-control "
+									id="time">
+									<f:convertDateTime pattern="hh:mm" />
 									<f:validateRequired />
 								</h:inputText>
 
 							</div>
 							<div class="col-sm-6">
-								<h:outputLabel value="Date du Projection :" for="dateProjection" />
-								<h:inputText a:type="date"
-									value="#{seances.seanceToAdd.dateProjection}"
-									class="form-control " id="dateProjection">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
-									<f:validateRequired />
-								</h:inputText>
+						
+<!-- 							     <h:outputLabel for="restricted" value="Restricted:" /> -->
+<!--         <p:calendar  id="restricted" value="#{seances.seanceToAdd.dateProjection}" mindate="4/1/14" maxdate="7/1/14" /> -->
+
+								<h:outputLabel value="Date du Projection :" for="mask" />
+								<p:calendar  mask="true" pattern="dd-MM-yyyy"
+									value="#{seances.seanceToAdd.dateProjection}"   mindate="4/1/14" maxdate="7/1/14" id="mask"/>
 
 							</div>
 						</div>
-							<div class="form-group row">
+						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
 								<!-- select -->
-											<h:outputLabel value="Titre du film :" for="film" />
-											<p:selectOneMenu filter="true" class="form-control"   required="true"
-												id="film" value="#{seances.idFilm}">
-												<f:selectItem itemLabel="Select One" itemValue="#{null}"
+								<h:outputLabel value="Titre du film :" for="film" />
+								<t:selectOneMenu filter="true" class="form-control"
+									required="true" id="film" value="#{seances.idFilm}">
+									<f:selectItem itemLabel="Select One" itemValue="#{null}"
 										noSelectionOption="true" />
-												<f:selectItems itemvalue="#{seances.allfilms}"
-													var="film" itemLabel="#{film.titre}"
-													itemValue="#{film.id}" />
-											</p:selectOneMenu>
+									<f:selectItems value="#{seances.allfilms}" var="film"
+										itemLabel="#{film.titre}" itemValue="#{film.id}" />
+								</t:selectOneMenu>
 
 							</div>
 							<div class="col-sm-6">
-									<h:outputLabel value="Numero de salle :" for="salle" />
-											<p:selectOneMenu filter="true" class="form-control "  required="true"
-												id="salle" value="#{seances.idSalle}">
-													<f:selectItem itemLabel="Select One" itemValue="#{null}"
+								<h:outputLabel value="Numero de salle :" for="salle" />
+								<t:selectOneMenu filter="true" class="form-control "
+									required="true" id="salle" value="#{seances.idSalle}">
+									<f:selectItem itemLabel="Select One" itemValue="#{null}"
 										noSelectionOption="true" />
-												<f:selectItems value="#{seances.allSalles}"
-													var="salle" itemLabel="#{salle.numero}"
-													itemValue="#{salle.id}" />
-											</p:selectOneMenu>
+									<f:selectItems value="#{seances.allSalles}" var="salle"
+										itemLabel="#{salle.numero}" itemValue="#{salle.id}" />
+								</t:selectOneMenu>
 							</div>
+							
 						</div>
-						
+
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelAdd" value="Annuler"
-									action="#{seances.cancelAdd}"
-									class="btn btn-danger disabled" immediate="true" ajax="false" />
+									action="#{seances.cancelAdd}" class="btn btn-danger disabled"
+									immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Ajouter une salle"
-									action="#{seances.addSeance()}"
-									class="btn btn-secondary active " />
+								<h:commandButton value="Ajouter une seance"
+									action="#{seances.addSeance}" class="btn btn-secondary active " />
 							</div>
 						</div>
 					</div>
@@ -186,7 +229,8 @@
 		<h:form class="user" id="formEdit" rendered="#{seances.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des Seances</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						Seances</h6>
 				</div>
 				<div class="card-body">
 
@@ -208,36 +252,28 @@
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Date du Projection :" for="dateProjection" />
-								<h:inputText a:type="date"
-									value="#{seances.seanceToUpdate.dateProjection}"
-									class="form-control " id="dateProjection">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
-									<f:validateRequired />
-								</h:inputText>
-
+								<p:calendar id="mask" value="#{seances.seanceToAdd.dateProjection}" pattern="dd-MM-yyyy" mask="true" />
 							</div>
 						</div>
-							<div class="form-group row">
+						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
 								<!-- select -->
-											<h:outputLabel value="Titre du film" for="film" />
-											<p:selectOneMenu filter="true" class="form-control "  required="true"
-												id="film" value="#{seances.idFilm}">
-												<f:selectItems value="#{seances.allfilms}"
-													var="film" itemLabel="#{film.titre}"
-													itemValue="#{film.id}" />
-											</p:selectOneMenu>
+								<h:outputLabel value="Titre du film" for="film" />
+								<t:selectOneMenu filter="true" class="form-control "
+									required="true" id="film" value="#{seances.idFilm}">
+									<f:selectItems value="#{seances.allfilms}" var="film"
+										itemLabel="#{film.id}" itemValue="#{film.id}" />
+								</t:selectOneMenu>
 
 							</div>
 							<div class="col-sm-6">
-									<h:outputLabel value="Titre du film" for="salle" />
-											<p:selectOneMenu filter="true" class="form-control "  required="true"
-												id="salle" value="#{seances.idSalle}">
-												<f:selectItems value="#{seances.allSalles}"
-													var="salle" itemLabel="#{salle.numero}"
-													itemValue="#{salle.id}" />
-											</p:selectOneMenu>
+								<h:outputLabel value="Titre du film" for="salle" />
+								<t:selectOneMenu filter="true" class="form-control "
+									required="true" id="salle" value="#{seances.idSalle}">
+									<f:selectItems value="#{seances.allSalles}" var="salle"
+										itemLabel="#{salle.numero}" itemValue="#{salle.id}" />
+								</t:selectOneMenu>
 							</div>
 						</div>
 						<div class="row">
@@ -266,7 +302,9 @@
 
 
 	</ui:define>
-</ui:composition>
+	
+</ui:composition> 
 
 
-
+</h:body>
+</h:html>

@@ -1,6 +1,7 @@
 package com.watchme.models;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -23,9 +24,9 @@ public class Seance implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	private Date heureDebut;
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIME)
 	private Date heureFin;
 	@Temporal(TemporalType.DATE)
 	private Date dateProjection;
@@ -60,6 +61,7 @@ public class Seance implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public Date getHeureDebut() {
 		return heureDebut;

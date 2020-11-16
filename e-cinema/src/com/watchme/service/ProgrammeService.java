@@ -16,7 +16,7 @@ public class ProgrammeService {
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	EntityManager entityManager = factory.createEntityManager();
 
-	public List<Programme> findAll() {
+	public ArrayList<Programme> findAll() {
 
 		Query query = entityManager.createQuery("SELECT p FROM Programme p");
 		ArrayList<Programme> programmes = new ArrayList<Programme>();

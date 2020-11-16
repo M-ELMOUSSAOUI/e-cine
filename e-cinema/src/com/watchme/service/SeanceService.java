@@ -70,5 +70,10 @@ public class SeanceService {
 		em.remove(seance);
 		em.getTransaction().commit();
 	}
+	
+	// update attribute activate
+	public void updateActivate() {
+		
+	}
 
 }

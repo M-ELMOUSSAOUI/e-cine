@@ -2,6 +2,7 @@ package com.watchme.beans;
 
 import java.util.ArrayList;
 
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.watchme.models.Film;
@@ -71,6 +72,7 @@ public class FilmBean {
 
 	
 	public ArrayList<Film> getAllfilms() {
+		System.out.println("film bean");
 		allfilms = (ArrayList<Film>) filmservice.findAll();
 		return allfilms;
 	}

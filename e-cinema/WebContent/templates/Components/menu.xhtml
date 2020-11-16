@@ -5,6 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 
+
+
 <!-- Sidebar -->
 <ul
 	class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
@@ -13,20 +15,22 @@
 	<a
 		class="sidebar-brand d-flex align-items-center justify-content-center"
 		href="redirect">
-	
 
-		<div class="sidebar-brand-text mx-2"><br/>Gestion du cinéma - WATCH
-			ME</div>
+
+		<div class="sidebar-brand-text mx-2">
+			<br />Gestion du cinÃ©ma - WATCH ME
+		</div>
 	</a>
 
 	<!-- Divider -->
-<p> </p>
+	<p></p>
 
 	<hr class="sidebar-divider my-0" />
 
 	<!-- Nav Item - Dashboard -->
-	<li class="nav-item active"><a class="nav-link"  href="./views/admin/dashBoard.jsf">
-			<i class="fas fa-fw fa-users"></i> <span>Administrateurs</span>
+	<li class="nav-item active"><a class="nav-link"
+		href="./views/admin/dashBoard.jsf"> <i class="fas fa-fw fa-users"></i>
+			<span>Administrateurs</span>
 	</a></li>
 
 	<!-- Divider -->
@@ -38,17 +42,23 @@
 	<!-- Nav Item - Pages Collapse Menu -->
 	<li class="nav-item"><a class="nav-link collapsed" href="#"
 		data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-		aria-controls="collapseTwo"> <i class="fas fa-fw fa-table"></i> <span>Gestion des film</span>
+		aria-controls="collapseTwo"> <i class="fas fa-fw fa-table"></i> <span>Gestion
+				des film</span>
 	</a>
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">Détails</h6>
+				<h6 class="collapse-header">DÃ©tails</h6>
 
-				<a class="collapse-item" href="#{request.contextPath}/views/admin/salles.jsf"> Films</a> 
-				<a class="collapse-item" href="#{request.contextPath}/views/admin/genre.jsf">Genre</a>
-					<a class="collapse-item" href="#{request.contextPath}/views/admin/acteurs.jsf"> Acteurs</a>
-						<a class="collapse-item" href="#{request.contextPath}/views/admin/realisateur.jsf"> Réalisateurs</a>
+				<a class="collapse-item"
+					href="#{request.contextPath}/views/admin/salles.jsf"> Films</a> <a
+					class="collapse-item"
+					href="#{request.contextPath}/views/admin/genre.jsf">Genre</a> <a
+					class="collapse-item"
+					href="#{request.contextPath}/views/admin/acteurs.jsf"> Acteurs</a>
+				<a class="collapse-item"
+					href="#{request.contextPath}/index.jsf">
+					RÃ©alisateurs</a>
 
 			</div>
 		</div></li>
@@ -63,9 +73,12 @@
 			aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Nos programmes:</h6>
-				<a class="collapse-item"  href="#{request.contextPath}/views/admin/programme.jsf">Programme</a>
-				<a class="collapse-item"  href="#{request.contextPath}/views/admin/seances.jsf">Séance</a>
-				<a class="collapse-item" href="#{request.contextPath}/views/admin/salles.jsf">Salle</a>
+				<a class="collapse-item"
+					href="#{request.contextPath}/views/admin/programme.jsf">Programme</a>
+				<a class="collapse-item"
+					href="#{request.contextPath}/views/admin/seances.jsf">SÃ©ance</a> <a
+					class="collapse-item"
+					href="#{request.contextPath}/views/admin/salles.jsf">Salle</a>
 
 			</div>
 		</div></li>
@@ -84,10 +97,10 @@
 		<button class="rounded-circle border-0" id="sidebarToggle"></button>
 	</div>
 </ul>
-</html>
+
 
 
 <!-- End of Sidebar -->
-
+</html>
 
 

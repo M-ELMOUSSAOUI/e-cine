@@ -1,5 +1,6 @@
 package app;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
@@ -26,8 +27,9 @@ public class Test {
      try {
     	 
     	 fs.findAll().stream().forEach(e-> System.out.println(e.getTitre()));
-    	boolean var =  as.login(new Administrateur("moussa","mohamed@gmaol.com","123456"));
-    	 System.err.println(var);
+    		Time heureFin = new Time(107820);
+    		System.out.println(heureFin);
+    	
 		
 	} catch (Exception e) {
 		// TODO: handle exception

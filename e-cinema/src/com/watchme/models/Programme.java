@@ -26,9 +26,8 @@ public class Programme implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	@Temporal(TemporalType.DATE)
+	
 	private Date dateDebut;
-	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
 
