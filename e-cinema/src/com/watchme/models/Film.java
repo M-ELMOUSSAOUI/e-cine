@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -30,7 +31,9 @@ public class Film implements Serializable {
 	private Long duree;
 	private String description;
 	private Date datederealisation;
-	private String fiche;
+	
+	@Lob
+	private byte[] fiche;
 
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -49,7 +52,7 @@ public class Film implements Serializable {
 	}
 
 
-	public Film(String titre, Long duree, String description, Date datederealisation, String fiche,
+	public Film(String titre, Long duree, String description, Date datederealisation, byte[] fiche,
 			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
 	
 
@@ -106,11 +109,11 @@ public class Film implements Serializable {
 		this.datederealisation = datederealisation;
 	}
 
-	public String getFiche() {
+	public byte[] getFiche() {
 		return fiche;
 	}
 
-	public void setFiche(String fiche) {
+	public void setFiche(byte[] fiche) {
 		this.fiche = fiche;
 	}
 
@@ -137,5 +140,7 @@ public class Film implements Serializable {
 	public void setRealisateur(Realisateur realisateur) {
 		this.realisateur = realisateur;
 	}
+	
+	
 
 }
