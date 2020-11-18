@@ -6,8 +6,8 @@
 		<!-- afficher table admins -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Liste des Salles
-					#{request.contextPath}</h6>
+				<h6 class="m-0 font-weight-bold text-primary">Liste des
+					realisateurs</h6>
 			</div>
 			<div class="card-body">
 				<h:form>
@@ -15,8 +15,8 @@
 						<div align="right">
 							<h:form id="action">
 
-								<h:commandButton id="addSalle" value="Ajouter"
-									action="#{salles.prepareAdd}" ajax="false"
+								<h:commandButton id="addRealisateur" value="Ajouter"
+									action="#{realisateurs.prepareAdd}" ajax="false"
 									class="btn btn-primary  " />
 							</h:form>
 						</div>
@@ -27,8 +27,8 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Numero</th>
-									<th>Nombre de place</th>
+									<th>Nom</th>
+									<th>Nationalite</th>
 									<th>Actions</th>
 
 
@@ -38,8 +38,8 @@
 							<tfoot>
 								<tr>
 									<th>ID</th>
-									<th>Numero</th>
-									<th>Nombre de place</th>
+									<th>Nom</th>
+									<th>Nationalite</th>
 									<th>Actions</th>
 
 
@@ -47,22 +47,22 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								<ui:repeat value="${salles.allsalles}" var="s">
+								<ui:repeat value="${realisateurs.allrealisateurs}" var="r">
 									<tr>
-										<td>${s.id}</td>
-										<td>${s.numero}</td>
-										<th>${s.nombrePlace }</th>
+										<td>${r.id}</td>
+										<td>${r.nom}</td>
+										<td>${r.nationalite}</td>
 										<td>
 											<div align="center">
 												<h:commandButton class="btn btn-danger"
-													action="#{salles.delete(s.id)}" value="delete"
-													onclick="return confirm('Are you sure to delete product?')">
+													action="#{realisateurs.delete(r.id)}" value="delete"
+													onclick="return confirm('Etes-vous sur ?')">
 												</h:commandButton>
 												<h:commandButton style="margin-left:20px"
-													class="btn btn-warning" id="editSalle"
-													action="#{salles.edit}" value="Edit">
-													<f:setPropertyActionListener target="#{salles.data}"
-														value="${s.id}" />
+													class="btn btn-warning" id="editRealisateur"
+													action="#{realisateurs.edit}" value="Edit">
+													<f:setPropertyActionListener target="#{realisateurs.data}"
+														value="${r.id}" />
 												</h:commandButton>
 											</div>
 
@@ -82,35 +82,36 @@
 			</div>
 
 		</div>
-		<!-- Ajouter salle-->
+		<!-- Ajouter realisateur-->
 
-		<h:form class="user" id="formNew" rendered="#{salles.addMode}">
+		<h:form class="user" id="formNew" rendered="#{realisateurs.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
-						Salles</h6>
+						realisateurs</h6>
 				</div>
 				<div class="card-body">
 
 					<div class="p-5">
 						<div class="text-center">
-							<h1 class="h4 text-gray-900 mb-4">Ajouter une salle</h1>
+							<h1 class="h4 text-gray-900 mb-4">Ajouter un realisateur</h1>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
-								<h:outputLabel value="Nombre de place:" for="nombrePlace" />
-								<h:inputText type="number"
-									value="#{salles.salleToAdd.nombrePlace}"
-									class="form-control form-control-user" id="nombrePlace"
-									placeholder="Nombre de place">
+								<h:outputLabel value="Nom :" for="nom" />
+								<h:inputText type="text"
+									value="#{realisateurs.realisateurToAdd.nom}"
+									class="form-control form-control-user" id="nom"
+									placeholder="Nom ">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
-							<div class="col-sm-6">
-								<h:outputLabel value="Numero" for="numero" />
-								<h:inputText type="text" value="#{salles.salleToAdd.numero}"
-									class="form-control form-control-user" id="numero"
-									placeholder="Numero">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								<h:outputLabel value="Nationalite :" for="nationalite" />
+								<h:inputText type="text"
+									value="#{realisateurs.realisateurToAdd.nationalite}"
+									class="form-control form-control-user" id="nationalite"
+									placeholder="Nationalite">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
@@ -119,13 +120,14 @@
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelAdd" value="Annuler"
-									action="#{salles.cancelAdd}" class="btn btn-danger disabled"
-									immediate="true" ajax="false" />
+									action="#{realisateurs.cancelAdd}"
+									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Ajouter une salle"
-									action="#{salles.addSalle()}" class="btn btn-secondary active " />
+								<h:commandButton value="Ajouter un realisateur"
+									action="#{realisateurs.addRealisateur()}"
+									class="btn btn-secondary active " />
 							</div>
 						</div>
 					</div>
@@ -138,35 +140,36 @@
 
 
 		<!-- FIN D AJOUT -->
-		<!-- Update salle-->
+		<!-- Update Realisateur-->
 
-		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
+		<h:form class="user" id="formEdit" rendered="#{realisateurs.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
-						salles</h6>
+						realisateurs</h6>
 				</div>
 				<div class="card-body">
 
 					<div class="p-5">
 						<div class="text-center">
-							<h1 class="h4 text-gray-900 mb-4">Modifier une salle</h1>
+							<h1 class="h4 text-gray-900 mb-4">Modifier un realisateur</h1>
 						</div>
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
-								<h:outputLabel value="Nombre de place:" for="nombrePlaceEdit" />
-								<h:inputText type="number"
-									value="#{salles.salleToUpdate.nombrePlace}"
-									class="form-control form-control-user" id="nombrePlaceEdit"
-									placeholder="Nombre de place">
+								<h:outputLabel value="Nom:" for="nomEdit" />
+								<h:inputText type="text"
+									value="#{realisateurs.realisateurToUpdate.nom}"
+									class="form-control form-control-user" id="nomEdit"
+									placeholder="Nom">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
-							<div class="col-sm-6">
-								<h:outputLabel value="Numero" for="numeroEdit" />
-								<h:inputText type="text" class="form-control form-control-user"
-									id="numeroEdit" value="#{salles.salleToUpdate.numero}"
-									placeholder="Numero">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								<h:outputLabel value="Nationalite:" for="nationaliteEdit" />
+								<h:inputText type="text"
+									value="#{realisateurs.realisateurToUpdate.nationalite}"
+									class="form-control form-control-user" id="nationaliteEdit"
+									placeholder="Nationalite">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
@@ -174,12 +177,13 @@
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelEdit" value="Annuler"
-									action="#{salles.cancelUpdate}" class="btn btn-danger disabled"
-									immediate="true" ajax="false" />
+									action="#{realisateurs.cancelUpdate}"
+									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Modifier" action="#{salles.updateSalle}"
+								<h:commandButton value="Modifier"
+									action="#{realisateurs.updateRealisateur}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -187,6 +191,10 @@
 				</div>
 			</div>
 		</h:form>
+
+
+
+
 
 		<!-- FIN D update -->
 

@@ -9,7 +9,6 @@
 
 
 		<class>com.watchme.models.Salle</class>
-		<class>com.watchme.models.Programme</class>
 		<class>com.watchme.models.Personne</class>
 		<class>com.watchme.models.Administrateur</class>
 		<class>com.watchme.models.Membre</class>
@@ -17,14 +16,16 @@
 		<class>com.watchme.models.Acteur</class>
 		<class>com.watchme.models.Realisateur</class>
 		<class>com.watchme.models.Film</class>
-		<class>com.watchme.models.Genre   </class>
-		<class>com.watchme.models.Seance  </class>
+		<class>com.watchme.models.Genre</class>
+		<class>com.watchme.models.Programme</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
+
 				value="jdbc:mysql://localhost/cinema?serverTimezone=UTC" />
+
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 

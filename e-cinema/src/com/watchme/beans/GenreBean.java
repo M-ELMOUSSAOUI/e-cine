@@ -23,6 +23,9 @@ public class GenreBean {
 	private String data;
 
 	
+	public void prepareAdd() {
+		addMode = true;
+	}
 
 
 	public void addGenre() {
