@@ -1,11 +1,15 @@
 package com.watchme.beans;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.FaceletContext;
 
 
 import com.watchme.models.Acteur;
@@ -18,7 +22,7 @@ import com.watchme.service.GenreService;
 import com.watchme.service.RealisateurService;
 
 @ManagedBean(name = "films")
-@SessionScoped
+@RequestScoped
 public class FilmBean {
 
 	private long idActeur;
@@ -39,7 +43,8 @@ public class FilmBean {
 	private Film filmToUpdate = new Film();
 	private Film filmToAdd = new Film();
 	private Film filmToShow;
-	private String filter="lolo";
+	private String filterValue;
+	private String keyWord;
 
 
 	private boolean editMode = false;
@@ -73,8 +78,6 @@ public class FilmBean {
 		filmToUpdate = filmservice.findById(selectedId);
 
 	}
-
-
 
 	public void show() {
 		System.out.println("test");
@@ -114,18 +117,19 @@ public class FilmBean {
 		allfilms = (ArrayList<Film>) filmservice.findAll();
 	}
 
-      
+        public void search() {
+        	if(this.keyWord!=null) {
+    			allfilms = (ArrayList<Film>) filmservice.findJustFilm(keyWord);
+    		}
+        }
 
 	public ArrayList<Film> getAllfilms() {
-//		if(filter!=null) {
-//			allfilms= (ArrayList<Film>) filmservice.findJustFilm(filter);
-//		}
-//		else 
-//			if(filter == null)
-//		{
-//		allfilms = (ArrayList<Film>) filmservice.findAll();
-//		}
+		if(this.keyWord!=null) {
+			allfilms= (ArrayList<Film>) filmservice.findJustFilm(keyWord);
+		}
+		else {
 		allfilms = (ArrayList<Film>) filmservice.findAll();
+		}
 		return allfilms;
 	}
 
@@ -320,14 +324,21 @@ public class FilmBean {
 		this.showFilm = showFilm;
 	}
 
-	
-	public String getFilter() {
-		return filter;
+	public String getFilterValue() {
+		return filterValue;
 	}
 
-	public void setFilter(String filter) {
-		this.filter = filter;
+	public void setFilterValue(String filterValue) {
+		this.filterValue = filterValue;
 	}
 
+
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
 
 }
