@@ -4,15 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-<!-- <link rel="stylesheet" type="text/css" href="#{request.contextPath}/templates/vendor/fontawesome-free/css/all.min.css" /> -->
-<!-- 	<link  href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" /> -->
-	
 
- 
-<!--    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/templates/css/sb-admin-2.min.css" /> -->
-<!--    <link rel="stylesheet" type="text/css" href="#{request.contextPath}/templates/vendor/datatables/dataTables.bootstrap4.min.css" /> -->
 </h:head>
-
 <!-- Sidebar -->
 <ul
 	class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
@@ -20,11 +13,9 @@
 	<!-- Sidebar - Brand -->
 	<a
 		class="sidebar-brand d-flex align-items-center justify-content-center"
-		href="redirect">
-
-
+		href="#{request.contextPath}/views/admin/dashBoard.jsf">
 		<div class="sidebar-brand-text mx-2">
-			<br />Gestion du cinÃ©ma - WATCH ME
+			<br />Gestion du cinéma - WATCH ME
 		</div>
 	</a>
 
@@ -35,8 +26,8 @@
 
 	<!-- Nav Item - Dashboard -->
 	<li class="nav-item active"><a class="nav-link"
-		href="./views/admin/dashBoard.jsf"> <i class="fas fa-fw fa-users"></i>
-			<span>Administrateurs</span>
+		href="#{request.contextPath}/views/admin/dashBoard.jsf"> <i
+			class="fas fa-fw fa-users"></i> <span>Administrateurs</span>
 	</a></li>
 
 	<!-- Divider -->
@@ -54,7 +45,7 @@
 		<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 			data-parent="#accordionSidebar">
 			<div class="bg-white py-2 collapse-inner rounded">
-				<h6 class="collapse-header">DÃ©tails</h6>
+				<h6 class="collapse-header">Détails</h6>
 
 				<a class="collapse-item"
 					href="#{request.contextPath}/views/admin/salles.jsf"> Films</a> <a
@@ -62,9 +53,8 @@
 					href="#{request.contextPath}/views/admin/genre.jsf">Genre</a> <a
 					class="collapse-item"
 					href="#{request.contextPath}/views/admin/acteurs.jsf"> Acteurs</a>
-				<a class="collapse-item"
-					href="#{request.contextPath}/index.jsf">
-					RÃ©alisateurs</a>
+				<a class="collapse-item" href="#{request.contextPath}/index.jsf">
+					Réalisateurs</a>
 
 			</div>
 		</div></li>
@@ -80,58 +70,19 @@
 			<div class="bg-white py-2 collapse-inner rounded">
 				<h6 class="collapse-header">Nos programmes:</h6>
 				<a class="collapse-item"
-					href="#{request.contextPath}/views/admin/programme.jsf">Programme</a>
-				<a class="collapse-item"
-					href="#{request.contextPath}/views/admin/seances.jsf">SÃ©ance</a> <a
+					href="#{request.contextPath}/views/admin/programme.jsf">Programme</a> <a
 					class="collapse-item"
 					href="#{request.contextPath}/views/admin/salles.jsf">Salle</a>
 
 			</div>
 		</div></li>
-
-
-
-
-
-
-
 	<!-- Divider -->
 	<hr class="sidebar-divider d-none d-md-block" />
-
 	<!-- Sidebar Toggler (Sidebar) -->
 	<div class="text-center d-none d-md-inline">
 		<button class="rounded-circle border-0" id="sidebarToggle"></button>
 	</div>
 </ul>
-
-
-<!-- <script type="text/javascript" src="#{request.contextPath}/templates/vendor/jquery/jquery.min.js"></script> -->
-
-<!-- <script type="text/javascript" src="#{request.contextPath}/templates/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
-
-
-<!--   <script type="text/javascript" src="#{request.contextPath}/templates/vendor/jquery-easing/jquery.easing.min.js"></script> -->
-  
-  
-
-<!--   <script type="text/javascript" src="#{request.contextPath}/templates/js/sb-admin-2.min.js"></script> -->
-  
-
- <!-- Page level plugins --> 
-<!--   <script type="text/javascript" src="#{request.contextPath}/templates/vendor/chart.js/Chart.min.js"></script> -->
-
-
-  <!-- Page level custom scripts --> 
-<!--   <script type="text/javascript" src="#{request.contextPath}/templates/js/demo/chart-area-demo.js"></script> -->
-<!--   <script type="text/javascript" src="#{request.contextPath}/templates/js/demo/chart-pie-demo.js"></script> -->
- 
-<!--    <script type="text/javascript" src="#{request.contextPath}/templates/vendor/datatables/jquery.dataTables.min.js"></script> -->
-<!--     <script type="text/javascript" src="#{request.contextPath}/templates/vendor/datatables/dataTables.bootstrap4.min.js"></script> -->
-  
-  
-  <!-- Page level custom scripts --> 
-<!--    <script type="text/javascript" src="#{request.contextPath}/templates/js/demo/datatables-demo.js"></script> -->
-<!-- End of Sidebar -->
 </html>
 
 

@@ -2,76 +2,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
->
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-	<f:facet name="first">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-		<title>WATCH ME - Dashboard</title>
-
-		<!-- css --> 
-		<h:outputStylesheet
-			name="bootstrap/vendor/fontawesome-free/css/all.min.css" />
-		<h:link
-			outcome="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
-		<h:outputStylesheet name="bootstrap/css/sb-admin-2.min.css" />
-		<h:outputStylesheet
-			name="bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" />
-	<!-- script --> 
-		<h:outputScript   name="bootstrap/vendor/jquery/jquery.min.js"/>
-		<h:outputScript 
-			name="bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
-		<h:outputScript    name="bootstrap/vendor/jquery-easing/jquery.easing.js"/>
-		<h:outputScript  name="bootstrap/js/sb-admin-2.min.js"/>
-		<h:outputScript  name="bootstrap/vendor/chart.js/Chart.min.js"/>
-		<h:outputScript   name="bootstrap/js/demo/chart-area-demo.js"/>
-		<h:outputScript   name="bootstrap/js/demo/chart-pie-demo.js"/>
-		<h:outputScript 
-			name="bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"/>
-		<h:outputScript   name="bootstrap/js/demo/datatables-demo.js"/>
-	
-	</f:facet>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/bootstrap/vendor/fontawesome-free/css/all.min.css" />
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/bootstrap/css/sb-admin-2.min.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/bootstrap/vendor/datatables/dataTables.bootstrap4.min.css" />
 </h:head>
-<f:view contentType="text/html">
-	
-		<f:metadata>
-			<f:event listener="#{adminBean.isLoggedIn()}" type="preRenderView"></f:event>
-		</f:metadata>
+
+<f:metadata>
+	<f:event listener="#{adminBean.isLoggedIn()}" type="preRenderView"></f:event>
+</f:metadata>
 
 
-		<h:body id="page-top">
-			<!-- Page Wrapper -->
-			<div id="wrapper">
-				<ui:include src="views/Components/menu.xhtml" />
-				<!-- Content Wrapper -->
-				<div id="content-wrapper" class="d-flex flex-column">
-					<!-- Main Content -->
-					<div id="content">
-						<!-- Topbar -->
-						<ui:include src="views/Components/header.xhtml" />
-						<!-- End of Topbar -->
+<h:body id="page-top">
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<ui:include src="views/Components/menu.xhtml" />
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+			<!-- Main Content -->
+			<div id="content">
+				<!-- Topbar -->
+				<ui:include src="views/Components/header.xhtml" />
+				<!-- End of Topbar -->
 
-						<!-- Begin Page Content -->
-						<div class="container-fluid">
-							<ui:insert name="contenu">
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+					<ui:insert name="contenu">
                     Contenu Principal en Foncion de l'opération choisie<br />
-							</ui:insert>
-						</div>
-					</div>
-					<!-- End of Main Content -->
-					<!-- Footer -->
-					<ui:include src="views/Components/footer.xhtml" />
-					<!-- End of Footer -->
+					</ui:insert>
 				</div>
 			</div>
+			<!-- End of Main Content -->
+			<!-- Footer -->
+			<ui:include src="views/Components/footer.xhtml" />
+			<!-- End of Footer -->
+		</div>
+	</div>
+	<!-- Script -->
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/jquery/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-		</h:body>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/js/sb-admin-2.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/chart.js/Chart.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/js/demo/chart-area-demo.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/js/demo/chart-pie-demo.js"></script>
 
-	
-</f:view>
-	
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/bootstrap/js/demo/datatables-demo.js"></script>
+
+</h:body>
+
+
+
+
 </html>
