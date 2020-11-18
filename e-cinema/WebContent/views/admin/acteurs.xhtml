@@ -1,6 +1,6 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
+
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
 	<ui:define name="contenu">
 
@@ -16,13 +16,12 @@
 							<h:form id="action">
 
 								<h:commandButton id="addActeur" value="Ajouter"
-									action="#{acteurs.prepareAdd}" ajax="false" class="btn btn-primary  "
-									 />
+									action="#{acteurs.prepareAdd}" ajax="false"
+									class="btn btn-primary  " />
 							</h:form>
 						</div>
-<span>
-<br/>
-</span>
+						<span> <br />
+						</span>
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
@@ -59,7 +58,8 @@
 													action="#{acteurs.delete(a.id)}" value="delete"
 													onclick="return confirm('Etes-vous sur ?')">
 												</h:commandButton>
-												<h:commandButton style="margin-left:20px" class="btn btn-warning" id="editActeur"
+												<h:commandButton style="margin-left:20px"
+													class="btn btn-warning" id="editActeur"
 													action="#{acteurs.edit}" value="Edit">
 													<f:setPropertyActionListener target="#{acteurs.data}"
 														value="${a.id}" />
@@ -87,7 +87,8 @@
 		<h:form class="user" id="formNew" rendered="#{acteurs.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des Acteurs</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						Acteurs</h6>
 				</div>
 				<div class="card-body">
 
@@ -98,8 +99,7 @@
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 								<h:outputLabel value="Nom :" for="nom" />
-								<h:inputText type="text"
-									value="#{acteurs.acteurToAdd.nom}"
+								<h:inputText type="text" value="#{acteurs.acteurToAdd.nom}"
 									class="form-control form-control-user" id="nom"
 									placeholder="Nom ">
 									<f:validateRequired />
@@ -107,14 +107,13 @@
 							</div>
 							<div class="col-sm-6 mb-3 mb-sm-0">
 								<h:outputLabel value="Role :" for="role" />
-								<h:inputText type="text"
-									value="#{acteurs.acteurToAdd.role}"
+								<h:inputText type="text" value="#{acteurs.acteurToAdd.role}"
 									class="form-control form-control-user" id="role"
 									placeholder="Role">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
-							
+
 						</div>
 						<div class="row">
 							<div class="col">
@@ -125,7 +124,8 @@
 
 							<div class="col">
 								<h:commandButton value="Ajouter un acteur"
-									action="#{acteurs.addActeur()}" class="btn btn-secondary active " />
+									action="#{acteurs.addActeur()}"
+									class="btn btn-secondary active " />
 							</div>
 						</div>
 					</div>
@@ -143,7 +143,8 @@
 		<h:form class="user" id="formEdit" rendered="#{acteurs.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des acteurs</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						acteurs</h6>
 				</div>
 				<div class="card-body">
 
@@ -172,8 +173,9 @@
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelEdit" value="Annuler"
-									action="#{acteurs.cancelUpdate}" class="btn btn-danger disabled"
-									immediate="true" ajax="false" />
+									action="#{acteurs.cancelUpdate}"
+									class="btn btn-danger disabled" immediate="true" ajax="false" />
+>>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
 							</div>
 
 							<div class="col">

@@ -1,5 +1,6 @@
 package com.watchme.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.watchme.models.Film;
-import com.watchme.models.Membre;
 
 @ApplicationScoped
 public class FilmService {
@@ -19,8 +19,9 @@ public class FilmService {
 	private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 	EntityManager entityManager = factory.createEntityManager();
 
-	public List<Film> findAll() {
-
+	@SuppressWarnings("unchecked")
+	public ArrayList<Film> findAll() {
+		System.out.println("film beans");
     	Query query = entityManager.createQuery("SELECT f FROM Film f");
     	ArrayList<Film> films = new ArrayList<Film>();
     	List<Film> list = query.getResultList();
@@ -51,11 +52,7 @@ public class FilmService {
 	}
 
 	public Film findById(long id) {
-		entityManager.getTransaction().begin();
-		Film film = entityManager.find(Film.class, id);
-		System.out.println(film);
-		entityManager.getTransaction().commit();
-		return film;
+		return entityManager.find(Film.class , id);
 	}
 	
 	public void add(Film film) {

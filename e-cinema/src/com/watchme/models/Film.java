@@ -11,10 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-
 
 @Entity
 public class Film implements Serializable {
@@ -28,15 +27,17 @@ public class Film implements Serializable {
 	@Column(name = "id")
 	private Long id;
 	private String titre;
-	private Double duree;
+	private Long duree;
 	private String description;
 	private Date datederealisation;
-	private String fiche;
+
+	@Lob
+	private byte[] fiche;
+
 
 	// bi-directional many-to-one association to Genre
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Genre genre;
-
 
 	// bi-directional many-to-many association to Acteur
 	@ManyToMany(mappedBy = "films")
@@ -50,13 +51,16 @@ public class Film implements Serializable {
 
 	}
 
-	public Film(String titre, Double duree, String description, Date datederealisation, 
-			String fiche,
+
+
+	public Film(String titre, Long duree, String description, Date datederealisation, byte[] fiche,
 			Genre genre, List<Acteur> acteurs, Realisateur realisateur) {
+	
+
 		super();
 		this.titre = titre;
 		this.duree = duree;
-		
+
 		this.description = description;
 		this.datederealisation = datederealisation;
 		this.fiche = fiche;
@@ -64,8 +68,6 @@ public class Film implements Serializable {
 		this.acteurs = acteurs;
 		this.realisateur = realisateur;
 	}
-
-
 
 	// getter setters
 	public Long getId() {
@@ -84,14 +86,13 @@ public class Film implements Serializable {
 		this.titre = titre;
 	}
 
-	public Double getDuree() {
+	public Long getDuree() {
 		return duree;
 	}
 
-	public void setDuree(Double duree) {
+	public void setDuree(Long duree) {
 		this.duree = duree;
 	}
-
 
 	public String getDescription() {
 		return description;
@@ -110,11 +111,12 @@ public class Film implements Serializable {
 	}
 
 
-	public String getFiche() {
+	public byte[] getFiche() {
 		return fiche;
 	}
 
-	public void setFiche(String fiche) {
+
+	public void setFiche(byte[] fiche) {
 		this.fiche = fiche;
 	}
 
@@ -126,8 +128,6 @@ public class Film implements Serializable {
 		this.genre = genre;
 	}
 
-	
-
 	public List<Acteur> getActeurs() {
 		return acteurs;
 	}
@@ -136,16 +136,14 @@ public class Film implements Serializable {
 		this.acteurs = acteurs;
 	}
 
-
-
 	public Realisateur getRealisateur() {
 		return realisateur;
 	}
 
-
-
 	public void setRealisateur(Realisateur realisateur) {
 		this.realisateur = realisateur;
 	}
+	
+	
 
 }

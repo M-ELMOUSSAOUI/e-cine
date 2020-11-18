@@ -1,12 +1,16 @@
-<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:t="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
+
 	<ui:define name="contenu">
 
 		<!-- afficher table admins -->
 		<div class="card shadow mb-4">
+
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary">Liste des
 					Programmes</h6>
@@ -17,7 +21,7 @@
 						<div align="right">
 							<h:form id="action">
 
-								<h:commandButton id="addSalle" value="Ajouter"
+								<h:commandButton id="addProgramme" value="Ajouter"
 									action="#{programmes.prepareAdd}" ajax="false"
 									class="btn btn-primary  " />
 							</h:form>
@@ -29,8 +33,13 @@
 							<thead>
 								<tr>
 									<th>ID</th>
-									<th>Date de debut</th>
-									<th>Date du fin</th>
+									<th>Heure de debut</th>
+									<th>Heure du fin</th>
+									<th>Date du projection</th>
+									<th>Film</th>
+									<th>Salle</th>
+									<th>Active</th>
+									<th>Etat</th>
 									<th>Actions</th>
 
 
@@ -40,33 +49,59 @@
 							<tfoot>
 								<tr>
 									<th>ID</th>
-									<th>Date de debut</th>
-									<th>Date du fin</th>
+									<th>Heure de debut</th>
+									<th>Heure du fin</th>
+									<th>Date du projection</th>
+									<th>Film</th>
+									<th>Salle</th>
+									<th>Active</th>
+									<th>Etat</th>
 									<th>Actions</th>
-
 
 
 
 								</tr>
 							</tfoot>
 							<tbody>
-								<ui:repeat value="${programmes.allprogrammes}" var="p">
+								<ui:repeat value="${programmes.allprogrammes}" var="s">
 									<tr>
-										<td>${p.id}</td>
-										<td>${p.dateDebut}</td>
-										<th>${p.dateFin }</th>
+										<td>${s.id}</td>
+
+										<td><h:outputText value="${s.heureDebut}">
+												<f:convertDateTime type="time" pattern="HH-mm" />
+											</h:outputText></td>
+										<td><h:outputText value="${s.heureFin}">
+												<f:convertDateTime type="time" pattern="HH-mm" />
+											</h:outputText></td>
+										<td><h:outputText value="${s.dateProjection}">
+												<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+											</h:outputText></td>
+
+										<td>${s.film.titre}</td>
+										<td>${s.salle.numero}</td>
+										<td><h:commandButton action="#{programmes.desactiver}"
+												onclick="return confirm('Etes-vous sur de vouloir annuler cette seance du programme?')"
+												class="btn btn-info" value="Desactiver">
+												<f:setPropertyActionListener target="#{programmes.data}"
+													value="${s.id}" />
+											</h:commandButton></td>
+										<td>${s.activate}</td>
+										<!-- 											<c:if test="${s.activate==true}"><td>Activee </td></c:if> -->
+										<!-- 											<c:if test="${s.activate==false}"><td>Desactivee </td></c:if> -->
 										<td>
-											<div align="center">
+											<div align="right">
 												<h:commandButton class="btn btn-danger"
-													action="#{programmes.delete(p.id)}" value="delete"
-													onclick="return confirm('Etes-vous sur de vouloir supprimer ce programme?')">
+													action="#{programmes.delete(s.id)}" value="delete"
+													onclick="return confirm('Etes-vous sur de vouloir supprimer cette seance?')">
 												</h:commandButton>
+												<br /> <br />
 												<h:commandButton style="margin-left:20px"
-													class="btn btn-warning" id="editProgramme"
-													action="#{programmes.edit}" value="Edit">
+													class="btn btn-warning" id="editSeance"
+													action="#{programmes.edit}" value="   Edit   ">
 													<f:setPropertyActionListener target="#{programmes.data}"
-														value="${p.id}" />
+														value="${s.id}" />
 												</h:commandButton>
+
 											</div>
 
 										</td>
@@ -87,7 +122,8 @@
 		</div>
 		<!-- Ajouter programme-->
 
-		<h:form class="user" id="formNew" rendered="#{programmes.addMode}">
+		<h:form enctype="multipart/form-data" class="user" id="formNew"
+			rendered="#{programmes.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
@@ -102,26 +138,54 @@
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 
-								<h:outputLabel value="Date de debut :" for="dateDebut" />
-								<h:inputText a:type="date"
-									value="#{programmes.programmeToAdd.dateDebut}"
-									class="form-control " id="dateDebut">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
+								<h:outputLabel value="Heure de debut :" for="time" />
+								<h:inputText t:type="time"
+									value="#{programmes.programmeToAdd.heureDebut}"
+									class="form-control " id="time">
+									<f:convertDateTime pattern="HH:mm" />
 									<f:validateRequired />
 								</h:inputText>
-								
+
 							</div>
 							<div class="col-sm-6">
-								<h:outputLabel value="Date du Fin :" for="dateFin" />
-								<h:inputText a:type="date"
-									value="#{programmes.programmeToAdd.dateFin}"
-									class="form-control " id="dateFin">
+
+								<h:outputLabel value="Date du Projection :" for="mask" />
+								<h:inputText t:type="date"
+									value="#{programmes.programmeToAdd.dateProjection}"
+									class="form-control " min="#{Date.now}" id="mask">
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 									<f:validateRequired />
 								</h:inputText>
-								
+
 							</div>
 						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								<!-- select -->
+								<h:outputLabel value="Titre du film :" for="film" />
+								<h:selectOneMenu filter="true" class="form-control"
+									required="true" id="film" value="#{programmes.idFilm}">
+									<f:selectItem itemLabel="Select One" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{programmes.allfilms}" var="film"
+										itemLabel="#{film.titre}" itemValue="#{film.id}" />
+								</h:selectOneMenu>
+
+							</div>
+							<div class="col-sm-6">
+								<h:outputLabel value="Numero de salle :" for="salle" />
+								<h:selectOneMenu filter="true" class="form-control "
+									required="true" id="salle" value="#{programmes.idSalle}">
+									<f:selectItem itemLabel="Select One" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{programmes.allSalles}" var="salle"
+										itemLabel="#{salle.numero}" itemValue="#{salle.id}" />
+								</h:selectOneMenu>
+							</div>
+
+						</div>
+
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelAdd" value="Annuler"
@@ -131,7 +195,7 @@
 
 							<div class="col">
 								<h:commandButton value="Ajouter un programme"
-									action="#{programmes.addProgramme()}"
+									action="#{programmes.addProgramme}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -151,7 +215,7 @@
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
-						programmes</h6>
+						Programmes</h6>
 				</div>
 				<div class="card-body">
 
@@ -159,36 +223,60 @@
 						<div class="text-center">
 							<h1 class="h4 text-gray-900 mb-4">Modifier un programme</h1>
 						</div>
+			
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
-								<h:outputLabel value="Date de debut :" for="dateDebutEdit" />
-								<h:inputText a:type="date"
-									value="#{programmes.programmeToUpdate.dateDebut}"
-									class="form-control " id="dateDebutEdit">
-									<f:convertDateTime pattern="yyyy-MM-dd" />
+
+								<h:outputLabel value="Heure de debut :" for="Updatetime" />
+								<h:inputText t:type="time"
+									value="#{programmes.programmeToUpdate.heureDebut}"
+									class="form-control " id="Updatetime">
+									<f:convertDateTime pattern="HH:mm" />
 									<f:validateRequired />
 								</h:inputText>
 
 							</div>
 							<div class="col-sm-6">
-								<h:outputLabel value="Date du Fin :" for="dateFinEdit" />
-								<h:inputText a:type="date"
-									value="#{programmes.programmeToUpdate.dateFin}"
-									class="form-control " id="dateFinEdit">
+								<h:outputLabel value="Date du Projection :" for="mask" />
+								<h:inputText t:type="date"
+									value="#{programmes.programmeToUpdate.dateProjection}"
+									class="form-control " id="mask">
 									<f:convertDateTime pattern="yyyy-MM-dd" />
 									<f:validateRequired />
 								</h:inputText>
 							</div>
 						</div>
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+
+								<!-- select -->
+								<h:outputLabel value="Titre du film" for="film" />
+								<h:selectOneMenu filter="true" class="form-control "
+									required="true" id="film" value="#{programmes.idFilm}">
+									<f:selectItems value="#{programmes.allfilms}" var="film"
+										itemLabel="#{film.id}" itemValue="#{film.id}" />
+								</h:selectOneMenu>
+
+							</div>
+							<div class="col-sm-6">
+								<h:outputLabel value="Titre du film" for="salle" />
+								<h:selectOneMenu filter="true" class="form-control "
+									required="true" id="salle" value="#{programmes.idSalle}">
+									<f:selectItems value="#{programmes.allSalles}" var="salle"
+										itemLabel="#{salle.numero}" itemValue="#{salle.id}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
 						<div class="row">
 							<div class="col">
 								<h:commandButton id="btn_cancelEdit" value="Annuler"
-									action="#{programmes.cancelUpdate}" class="btn btn-danger disabled"
-									immediate="true" ajax="false" />
+									action="#{programmes.cancelUpdate}"
+									class="btn btn-danger disabled" immediate="true" ajax="false" />
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Modifier" action="#{programmes.updateProgramme}"
+								<h:commandButton value="Modifier"
+									action="#{programmes.updateProgramme()}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -205,7 +293,23 @@
 
 
 	</ui:define>
-</ui:composition>
+	<h:outputScript>
+      let today = new Date(),
+      day = today.getDate(),
+      month = today.getMonth()+1, //January is 0
+      year = today.getFullYear();
+           if(day &lt; 10){
+                  day='0'+day
+              }
+          if(month &lt; 10){
+              month='0'+month
+          }
+          today = year+'-'+month+'-'+day;
 
+ 
+
+          document.getElementById("mask").setAttribute("min", today);
+ </h:outputScript>
+</ui:composition>
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16051331318550" configfile="/e-cinema/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf16051722851740" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16051722851741" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="views/admin/salles.jsf" id="pf16051722851742" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf16051722851741" path="/views/admin/salles.jsf"/>
-  <links id="pf16051722851741" target="pf16051722851742" source="pf16051722851740" outcome="admin"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="178" id="pf16051722851740" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16055630110580" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="views/admin/salles.jsf" x="122" y="562" id="pf16051722851742" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" path="/views/admin/salles.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.jsf" x="338" y="178" id="pf16055630110581" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf16055630110580" path="/index.jsf"/>
+  <links id="pf16055630110580" target="pf16055630110581" source="pf16051722851740" outcome="admin"/>
 </pageflow:Pageflow>

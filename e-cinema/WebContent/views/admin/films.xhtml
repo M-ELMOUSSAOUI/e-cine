@@ -1,6 +1,5 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="contenu">
@@ -61,10 +60,14 @@
 								<ui:repeat value="${films.allfilms}" var="f">
 									<tr>
 										<td>${f.id}</td>
-										<td>${f.datederealisation}</td>
+										<td><h:outputText value="#{f.datederealisation}">
+												<f:convertDateTime type="date" pattern="dd-MM-yyyy" />
+											</h:outputText></td>
 										<td>${f.description}</td>
 										<td>${f.duree}</td>
-										<td>${f.fiche}</td>
+										<td>
+										<h:graphicImage value="data:image/jpeg;base64,#{films.getBytes(2)}" />
+										</td>
 										<td>${f.titre}</td>
 										<td>${f.genre.nom}</td>
 										<td>${f.realisateur.nom}</td>
@@ -76,7 +79,7 @@
 												</h:commandButton>
 												<h:commandButton style="margin-left:20px"
 													class="btn btn-warning" id="editFilm"
-													action="#{films.edit}" value="Edit">
+													action="#{films.edit(f)}" value="Edit">
 													<f:setPropertyActionListener target="#{films.data}"
 														value="${f.id}" />
 												</h:commandButton>
@@ -100,7 +103,7 @@
 		</div>
 		<!-- Ajouter film-->
 
-		<h:form class="user" id="formNew" rendered="#{films.addMode}">
+		<h:form  enctype="multipart/form-data" class="user" id="formNew" rendered="#{films.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
@@ -142,11 +145,8 @@
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Fiche" for="fiche" />
-								<h:inputText type="text" value="#{films.filmToAdd.fiche}"
-									class="form-control form-control-user" id="fiche"
-									placeholder="Fiche">
-									<f:validateRequired />
-								</h:inputText>
+								<h:inputFile value="#{films.fich}" />
+								
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Titre" for="titre" />
@@ -159,28 +159,27 @@
 							<div class="col-sm-6">
 								<!-- select -->
 								<h:outputLabel value="Genre du film :" for="genre" />
-								<p:selectOneMenu filter="true" class="form-control"  required="true" id="genre"
-									value="#{films.idGenre}">
+									<h:selectOneMenu value="#{films.idGenre}"  filter="true" class="form-control " > 
 									<f:selectItem itemLabel="Choisir" itemValue="#{null}"
 										noSelectionOption="true" />
 									<f:selectItems value="#{films.allGenres}" var="genre"
 										itemLabel="#{genre.nom}" itemValue="#{genre.id}" />
-								</p:selectOneMenu>
-								
-							</div>
 							
+						</h:selectOneMenu>
+							</div>
+
 							<div class="col-sm-6">
 
 								<!-- select -->
 								<h:outputLabel value="Nom du realisateur:" for="realisateur" />
-								<p:selectOneMenu filter="true" class="form-control "
+								<h:selectOneMenu filter="true" class="form-control "
 									id="realisateur" value="#{films.idrealisateur}">
 									<f:selectItem itemLabel="Chosir" itemValue="#{null}"
 										noSelectionOption="true" />
-									<f:selectItems value="#{films.allRealisateurs}"
+									<f:selectItems  value="#{films.allRealisateurs}"
 										var="realisateur" itemLabel="#{realisateur.nom}"
 										itemValue="#{realisateur.id}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 							</div>
 
 						</div>
@@ -264,30 +263,31 @@
 									<f:validateRequired />
 								</h:inputText>
 							</div>
-						<div class="col-sm-6">
+							<div class="col-sm-6">
 								<!-- select -->
 								<h:outputLabel value="Genre du film :" for="genre" />
-								<p:selectOneMenu filter="true" class="form-control"  required="true" id="genre"
-									value="#{films.idGenre}">
+								<h:selectOneMenu filter="true" class="form-control"
+									required="true" id="genre" value="#{films.idGenre}">
 									<f:selectItem itemLabel="Choisir" itemValue="#{null}"
 										noSelectionOption="true" />
 									<f:selectItems value="#{films.allGenres}" var="genre"
 										itemLabel="#{genre.nom}" itemValue="#{genre.id}" />
-								</p:selectOneMenu>
-								
+								</h:selectOneMenu>
+
 							</div>
 							<div class="col-sm-6">
 
 								<!-- select -->
 								<h:outputLabel value="Nom du realisateur:" for="realisateur" />
-								<p:selectOneMenu filter="true" class="form-control "
+								<h:selectOneMenu filter="true" class="form-control "
 									id="realisateur" value="#{films.idrealisateur}">
 									<f:selectItem itemLabel="Chosir" itemValue="#{null}"
 										noSelectionOption="true" />
 									<f:selectItems value="#{films.allRealisateurs}"
 										var="realisateur" itemLabel="#{realisateur.nom}"
 										itemValue="#{realisateur.id}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
+>>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
 							</div>
 						</div>
 						<div class="row">

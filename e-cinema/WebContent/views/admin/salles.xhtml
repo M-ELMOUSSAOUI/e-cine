@@ -1,13 +1,13 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
 	<ui:define name="contenu">
 
 		<!-- afficher table admins -->
 		<div class="card shadow mb-4">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">Liste des Salles #{request.contextPath}</h6>
+				<h6 class="m-0 font-weight-bold text-primary">Liste des Salles
+					#{request.contextPath}</h6>
 			</div>
 			<div class="card-body">
 				<h:form>
@@ -16,13 +16,12 @@
 							<h:form id="action">
 
 								<h:commandButton id="addSalle" value="Ajouter"
-									action="#{salles.prepareAdd}" ajax="false" class="btn btn-primary  "
-									 />
+									action="#{salles.prepareAdd}" ajax="false"
+									class="btn btn-primary  " />
 							</h:form>
 						</div>
-<span>
-<br/>
-</span>
+						<span> <br />
+						</span>
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
@@ -59,7 +58,8 @@
 													action="#{salles.delete(s.id)}" value="delete"
 													onclick="return confirm('Are you sure to delete product?')">
 												</h:commandButton>
-												<h:commandButton style="margin-left:20px" class="btn btn-warning" id="editSalle"
+												<h:commandButton style="margin-left:20px"
+													class="btn btn-warning" id="editSalle"
 													action="#{salles.edit}" value="Edit">
 													<f:setPropertyActionListener target="#{salles.data}"
 														value="${s.id}" />
@@ -87,7 +87,8 @@
 		<h:form class="user" id="formNew" rendered="#{salles.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des Salles</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						Salles</h6>
 				</div>
 				<div class="card-body">
 
@@ -113,6 +114,7 @@
 									<f:validateRequired />
 								</h:inputText>
 							</div>
+
 						</div>
 						<div class="row">
 							<div class="col">
@@ -141,7 +143,8 @@
 		<h:form class="user" id="formEdit" rendered="#{salles.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des salles</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						salles</h6>
 				</div>
 				<div class="card-body">
 
@@ -152,7 +155,8 @@
 						<div class="form-group row">
 							<div class="col-sm-6 mb-3 mb-sm-0">
 								<h:outputLabel value="Nombre de place:" for="nombrePlaceEdit" />
-								<h:inputText type="number" value="#{salles.salleToUpdate.nombrePlace}"
+								<h:inputText type="number"
+									value="#{salles.salleToUpdate.nombrePlace}"
 									class="form-control form-control-user" id="nombrePlaceEdit"
 									placeholder="Nombre de place">
 									<f:validateRequired />
@@ -175,8 +179,7 @@
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Modifier"
-									action="#{salles.updateSalle}"
+								<h:commandButton value="Modifier" action="#{salles.updateSalle}"
 									class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -184,10 +187,6 @@
 				</div>
 			</div>
 		</h:form>
-
-
-
-
 
 		<!-- FIN D update -->
 

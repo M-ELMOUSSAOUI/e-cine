@@ -1,16 +1,18 @@
 package com.watchme.beans;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
+import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.facelets.FaceletContext;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
+
+import org.eclipse.persistence.internal.oxm.conversion.Base64;
 
 import com.watchme.models.Acteur;
 import com.watchme.models.Film;
@@ -51,6 +53,7 @@ public class FilmBean {
 	private boolean addMode = false, showFilm = false;
 	private String data;
 
+	private Part fich;
 	public void addFilm() {
 		// filmToAdd.setActeurs(allActeur);
 		filmToAdd.setGenre(genreservice.get(this.idGenre));
@@ -58,6 +61,18 @@ public class FilmBean {
 		filmservice.add(filmToAdd);
 		filmToAdd = new Film();
 		addMode = false;
+
+		System.out.println(fich.getContentType().getBytes());
+		
+		  filmToAdd.setActeurs(allActeur);
+		  filmToAdd.setGenre(genreservice.get(this.idGenre));
+		  filmToAdd.setRealisateur(realisateurservice.get(this.idrealisateur));
+		  filmToAdd.setFiche(fich.getContentType().getBytes());
+		  filmservice.add(filmToAdd); 
+		  filmToAdd=new Film();
+		  addMode = false;
+		 
+
 	}
 
 	public void cancelAdd() {
@@ -80,6 +95,7 @@ public class FilmBean {
 	}
 
 	public void show() {
+
 		System.out.println("test");
 		FacesContext fc = FacesContext.getCurrentInstance();
 		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
@@ -87,6 +103,8 @@ public class FilmBean {
 		Long id = Long.parseLong(action);
 		filmToShow = filmservice.get(id);
 		System.out.println(filmToShow.getTitre());
+
+		
 		/*
 		 * FacesContext fc = FacesContext.getCurrentInstance(); String select =
 		 * fc.getExternalContext().getRequestParameterMap().get("id"); Long id =
@@ -324,6 +342,7 @@ public class FilmBean {
 		this.showFilm = showFilm;
 	}
 
+
 	public String getFilterValue() {
 		return filterValue;
 	}
@@ -339,6 +358,31 @@ public class FilmBean {
 
 	public void setKeyWord(String keyWord) {
 		this.keyWord = keyWord;
+	}
+
+
+	public String getBytes(Long filmId) {
+
+		System.out.println("get byes invoked--->" + filmId);
+		try {
+			Film f = filmservice.findById(filmId);
+			if (f != null) {
+				System.err.println(f.getTitre());
+				System.err.println( new String(Base64.base64Encode(f.getFiche())) );
+				return new String(Base64.base64Encode(f.getFiche()));
+			} else
+				return null;
+		} catch (Exception e) {
+			throw new FacesException("Something failed at SQL/DB level.", e);
+		}
+	}
+
+	public Part getFich() {
+		return fich;
+	}
+
+	public void setFich(Part fich) {
+		this.fich = fich;
 	}
 
 }

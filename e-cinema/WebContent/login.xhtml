@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
 <f:view contentType="text/html">
 	<h:head>
 		<meta charset="utf-8" />
@@ -18,7 +18,7 @@
 			name="viewport" />
 		<!-- Bootstrap 3.3.6 -->
 		<link rel="stylesheet"
-			href="#{request.contextPath}/templates/bootstrap/css/bootstrap.min.css" />
+			href="#{request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
 		<!-- Font Awesome -->
 		<link rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
@@ -27,17 +27,10 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
 		<!-- Theme style -->
 		<link rel="stylesheet"
-			href="#{request.contextPath}/templates/dist/css/AdminLTE.min.css" />
+			href="#{request.contextPath}/resources/bootstrap/dist/css/AdminLTE.min.css" />
 		<!-- iCheck -->
 		<link rel="stylesheet"
-			href="#{request.contextPath}/templates/plugins/iCheck/square/blue.css" />
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+			href="#{request.contextPath}/resources/bootstrap/plugins/iCheck/square/blue.css" />
 	</h:head>
 	<body class="hold-transition login-page">
 		<div class="login-box">
@@ -76,28 +69,28 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-4">
-							<p:commandButton id="login"
+							<h:commandButton id="login"
 								class="btn btn-primary btn-block btn-flat"
 								action="#{adminBean.validateUsernamePassword}" value="Login">
-							</p:commandButton>
+							</h:commandButton>
 						</div>
 					</div>
-					<p:messages  id="messages" showDetail="true" closable="true">
-						<p:autoUpdate />
-					</p:messages>
+					<h:messages  id="messages" showDetail="true" closable="true">
+						
+					</h:messages>
 				</h:form>
 			</div>
 		</div>
 
 		<!-- jQuery 2.2.0 -->
 		<script
-			src="#{request.contextPath}/templates/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+			src="#{request.contextPath}/resources/bootstrap/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 		<!-- Bootstrap 3.3.6 -->
 		<script
-			src="#{request.contextPath}/templates/bootstrap/js/bootstrap.min.js"></script>
+			src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 		<!-- iCheck -->
 		<script
-			src="#{request.contextPath}/templates/plugins/iCheck/icheck.min.js"></script>
+			src="#{request.contextPath}/resources/bootstrap/plugins/iCheck/icheck.min.js"></script>
 		<script>
 			$(function() {
 				$('input').iCheck({

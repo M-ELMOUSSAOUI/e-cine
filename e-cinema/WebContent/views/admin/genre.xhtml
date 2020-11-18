@@ -1,6 +1,5 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml">
 	<ui:define name="contenu">
 
@@ -16,13 +15,12 @@
 							<h:form id="action">
 
 								<h:commandButton id="addGenre" value="Ajouter"
-									action="#{genres.prepareAdd}" ajax="false" class="btn btn-primary  "
-									 />
+									action="#{genres.prepareAdd}" ajax="false"
+									class="btn btn-primary  " />
 							</h:form>
 						</div>
-<span>
-<br/>
-</span>
+						<span> <br />
+						</span>
 						<table class="table table-bordered" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
@@ -46,7 +44,7 @@
 								</tr>
 							</tfoot>
 							<tbody>
-								<ui:repeat value="${genres.allgenres}" var="g">
+								<ui:repeat value="${genres.allGenres}" var="g">
 									<tr>
 										<td>${g.id}</td>
 										<td>${g.nom}</td>
@@ -56,7 +54,8 @@
 													action="#{genres.delete(g.id)}" value="delete"
 													onclick="return confirm('Etes-vous sur ?')">
 												</h:commandButton>
-												<h:commandButton style="margin-left:20px" class="btn btn-warning" id="editGenre"
+												<h:commandButton style="margin-left:20px"
+													class="btn btn-warning" id="editGenre"
 													action="#{genres.edit}" value="Edit">
 													<f:setPropertyActionListener target="#{genres.data}"
 														value="${g.id}" />
@@ -84,7 +83,8 @@
 		<h:form class="user" id="formNew" rendered="#{genres.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des Genres</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						Genres</h6>
 				</div>
 				<div class="card-body">
 
@@ -95,14 +95,13 @@
 						<div class="form-group row">
 							<div class="col">
 								<h:outputLabel value="Nom :" for="nom" />
-								<h:inputText type="text"
-									value="#{genres.genreToAdd.nom}"
+								<h:inputText type="text" value="#{genres.genreToAdd.nom}"
 									class="form-control form-control-user" id="nom"
 									placeholder="Nom ">
 									<f:validateRequired />
 								</h:inputText>
 							</div>
-							
+
 						</div>
 						<div class="row">
 							<div class="col">
@@ -131,7 +130,8 @@
 		<h:form class="user" id="formEdit" rendered="#{genres.editMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Gestion des genres</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Gestion des
+						genres</h6>
 				</div>
 				<div class="card-body">
 
@@ -157,8 +157,8 @@
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Modifier"
-									action="#{genres.updateGenre}"
+								<h:commandButton value="Modifier" action="#{genres.updateGenre}"
+>>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
 									class="btn btn-secondary active " />
 							</div>
 						</div>
