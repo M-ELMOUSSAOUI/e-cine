@@ -1,9 +1,12 @@
 package com.watchme.beans;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 
 import com.watchme.models.Acteur;
 import com.watchme.models.Film;
@@ -14,19 +17,19 @@ import com.watchme.service.FilmService;
 import com.watchme.service.GenreService;
 import com.watchme.service.RealisateurService;
 
-@ManagedBean(name="films")
+@ManagedBean(name = "films")
 @SessionScoped
 public class FilmBean {
-	
-	private long idActeur ;
-	private long idGenre ;
-	private long idrealisateur ;
+
+	private long idActeur;
+	private long idGenre;
+	private long idrealisateur;
 	public ArrayList<Film> allfilms;
-	public ArrayList<Acteur> allActeur ;
+	public ArrayList<Acteur> allActeur;
 	public ArrayList<Genre> allGenres;
 	public ArrayList<Realisateur> allRealisateurs;
-	public Film film ;
-	private Genre genre ;
+	public Film film;
+	private Genre genre;
 	private Realisateur realisateur;
 	private Long selectedId;
 	public FilmService filmservice = new FilmService();
@@ -35,27 +38,31 @@ public class FilmBean {
 	public RealisateurService realisateurservice = new RealisateurService();
 	private Film filmToUpdate = new Film();
 	private Film filmToAdd = new Film();
+	private Film filmToShow;
+	private String filter="lolo";
+
+
 	private boolean editMode = false;
-	private boolean addMode = false;
+	private boolean addMode = false, showFilm = false;
 	private String data;
-	
-	
 
 	public void addFilm() {
-        //filmToAdd.setActeurs(allActeur);
-        filmToAdd.setGenre(genreservice.get(this.idGenre));
-        filmToAdd.setRealisateur(realisateurservice.get(this.idrealisateur));
+		// filmToAdd.setActeurs(allActeur);
+		filmToAdd.setGenre(genreservice.get(this.idGenre));
+		filmToAdd.setRealisateur(realisateurservice.get(this.idrealisateur));
 		filmservice.add(filmToAdd);
-		filmToAdd=new Film();
-		addMode = false;	
+		filmToAdd = new Film();
+		addMode = false;
 	}
 
 	public void cancelAdd() {
 		addMode = false;
 	}
+
 	public void cancelUpdate() {
 		editMode = false;
 	}
+
 	public void prepareAdd() {
 		addMode = true;
 	}
@@ -63,74 +70,109 @@ public class FilmBean {
 	public void edit() {
 		editMode = true;
 		selectedId = Long.parseLong(data);
-	     filmToUpdate= filmservice.findById(selectedId);
-	     
-	}
-	//
-	public void show() {
-		editMode = true;
-		selectedId = Long.parseLong(data);
-	     filmservice.findById(selectedId);
-	     
-	}
-	
-	
-	
-	// Count number of Films
-			public int count() {
-				return filmservice.findAll().size();
-			}
+		filmToUpdate = filmservice.findById(selectedId);
 
-	
-	public void updateFilm() {
-	
-		filmservice.update(this.filmToUpdate);
-		editMode=false;
 	}
+
+
+
+	public void show() {
+		System.out.println("test");
+		FacesContext fc = FacesContext.getCurrentInstance();
+		Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+		String action = params.get("id");
+		Long id = Long.parseLong(action);
+		filmToShow = filmservice.get(id);
+		System.out.println(filmToShow.getTitre());
+		/*
+		 * FacesContext fc = FacesContext.getCurrentInstance(); String select =
+		 * fc.getExternalContext().getRequestParameterMap().get("id"); Long id =
+		 * Long.parseLong(select); filmToShow= filmservice.get(id);
+		 * System.out.println(filmToShow.getTitre());
+		 */
+		/*
+		 * Map<String, String> data = fc.getExternalContext().getRequestParameterMap();
+		 * selectedId = Long.parseLong(data.get("id")); filmToShow=
+		 * filmservice.get(selectedId);
+		 */
+	}
+
+	// Count number of Films
+	public int count() {
+		return filmservice.findAll().size();
+	}
+
+	public void updateFilm() {
+
+		filmservice.update(this.filmToUpdate);
+		editMode = false;
+	}
+
 	public void delete(Long id) {
 
 		filmservice.deleteById(id);
 		allfilms = (ArrayList<Film>) filmservice.findAll();
 	}
 
-	
+      
+
 	public ArrayList<Film> getAllfilms() {
+//		if(filter!=null) {
+//			allfilms= (ArrayList<Film>) filmservice.findJustFilm(filter);
+//		}
+//		else 
+//			if(filter == null)
+//		{
+//		allfilms = (ArrayList<Film>) filmservice.findAll();
+//		}
 		allfilms = (ArrayList<Film>) filmservice.findAll();
 		return allfilms;
 	}
+
 	public void setAllfilms(ArrayList<Film> allfilms) {
 		this.allfilms = allfilms;
 	}
+
 	public Film getFilm() {
 		return film;
 	}
+
 	public void setFilm(Film film) {
 		this.film = film;
 	}
+
 	public Long getSelectedId() {
 		return selectedId;
 	}
+
 	public void setSelectedId(Long selectedId) {
 		this.selectedId = selectedId;
 	}
+
 	public FilmService getFilmservice() {
 		return filmservice;
 	}
+
 	public void setFilmservice(FilmService filmservice) {
 		this.filmservice = filmservice;
 	}
+
 	public Film getFilmToUpdate() {
 		return filmToUpdate;
 	}
+
 	public void setFilmToUpdate(Film filmToUpdate) {
 		this.filmToUpdate = filmToUpdate;
 	}
+
 	public Film getFilmToAdd() {
 		return filmToAdd;
 	}
+
 	public void setFilmToAdd(Film filmToAdd) {
 		this.filmToAdd = filmToAdd;
 	}
+
 	public Genre getGenre() {
 		return genre;
 	}
@@ -150,18 +192,23 @@ public class FilmBean {
 	public boolean isEditMode() {
 		return editMode;
 	}
+
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
 	}
+
 	public boolean isAddMode() {
 		return addMode;
 	}
+
 	public void setAddMode(boolean addMode) {
 		this.addMode = addMode;
 	}
+
 	public String getData() {
 		return data;
 	}
+
 	public void setData(String data) {
 		this.data = data;
 	}
@@ -231,7 +278,7 @@ public class FilmBean {
 	}
 
 	public ActeurService getActeurservice() {
-		 acteurservice = (ActeurService) acteurservice.findAll();
+		acteurservice = (ActeurService) acteurservice.findAll();
 		return acteurservice;
 	}
 
@@ -256,9 +303,31 @@ public class FilmBean {
 	public void setRealisateurservice(RealisateurService realisateurservice) {
 		this.realisateurservice = realisateurservice;
 	}
+
+	public Film getFilmToShow() {
+		return filmToShow;
+	}
+
+	public void setFilmToShow(Film filmToShow) {
+		this.filmToShow = filmToShow;
+	}
+
+	public boolean isShowFilm() {
+		return showFilm;
+	}
+
+	public void setShowFilm(boolean showFilm) {
+		this.showFilm = showFilm;
+	}
+
 	
-	
-	
-	
-	
+	public String getFilter() {
+		return filter;
+	}
+
+	public void setFilter(String filter) {
+		this.filter = filter;
+	}
+
+
 }

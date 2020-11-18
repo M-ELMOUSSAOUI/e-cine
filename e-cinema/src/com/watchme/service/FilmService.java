@@ -3,6 +3,7 @@ package com.watchme.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import com.watchme.models.Film;
 import com.watchme.models.Membre;
 
+@ApplicationScoped
 public class FilmService {
 
 	private static final String PERSISTENCE_UNIT_NAME = "Ecinema";
