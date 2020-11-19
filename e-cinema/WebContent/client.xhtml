@@ -1,4 +1,4 @@
-<html xmlns:h="http://java.sun.com/jsf/html"
+ <html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
@@ -82,19 +82,17 @@
 				<div class="divider-custom-line"></div>
 			</div>
 			<!-- Portfolio Grid Items-->
-			<h:form>
-				<p:dataTable var="f" value="#{films.allfilms}" widgetVar="filmTable"
+			<h:form enctype="multipart/form-data" >
+				<p:dataTable  var="f" value="#{films.allfilms}" widgetVar="filmTable"
 					emptyMessage="No film" filteredValue="#{films.filteredfilm}">
-
-
-
-					<p:column filterBy="#{f.fiche}" headerText="Fiche"
+					<p:column  headerText="Fiche"
 						filterMatchMode="contains">
-						<h:outputText value="#{f.fiche}" />
+						<img width="50" height="50"
+											src="data:image/png;base64,#{films.getBytes(f.id)}" />
 					</p:column>
 					<p:column filterBy="#{f.titre}" headerText="Nom du film"
 						filterMatchMode="contains">
-						<h:outputText value="#{f.titre}" />
+						<h:outputText style="text-align:center" value="#{f.titre}" />
 					</p:column>
 					<p:column filterBy="#{f.genre.nom}" headerText="Genre"
 						filterMatchMode="exact">

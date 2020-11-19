@@ -3,16 +3,14 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.faces.FacesException;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.facelets.FaceletContext;
 
-import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
-
+import org.apache.commons.fileupload.FileUpload;
 import org.eclipse.persistence.internal.oxm.conversion.Base64;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 
 import com.watchme.models.Acteur;
 import com.watchme.models.Film;
@@ -24,7 +22,7 @@ import com.watchme.service.GenreService;
 import com.watchme.service.RealisateurService;
 
 @ManagedBean(name = "films")
-@RequestScoped
+@ApplicationScoped
 public class FilmBean {
 
 	private long idActeur;
@@ -53,24 +51,18 @@ public class FilmBean {
 	private boolean addMode = false, showFilm = false;
 	private String data;
 
-	private Part fich;
+	private transient UploadedFile fich;
 	public void addFilm() {
-		// filmToAdd.setActeurs(allActeur);
-		filmToAdd.setGenre(genreservice.get(this.idGenre));
-		filmToAdd.setRealisateur(realisateurservice.get(this.idrealisateur));
-		filmservice.add(filmToAdd);
-		filmToAdd = new Film();
-		addMode = false;
-
-		System.out.println(fich.getContentType().getBytes());
 		
+				 
+		  
 		  filmToAdd.setActeurs(allActeur);
 		  filmToAdd.setGenre(genreservice.get(this.idGenre));
 		  filmToAdd.setRealisateur(realisateurservice.get(this.idrealisateur));
-		  filmToAdd.setFiche(fich.getContentType().getBytes());
+		  filmToAdd.setFiche(fich.getContent());
 		  filmservice.add(filmToAdd); 
-		  filmToAdd=new Film();
-		  addMode = false;
+		  filmToAdd=new Film(); addMode = false;
+		 
 		 
 
 	}
@@ -377,11 +369,11 @@ public class FilmBean {
 		}
 	}
 
-	public Part getFich() {
+	public UploadedFile getFich() {
 		return fich;
 	}
 
-	public void setFich(Part fich) {
+	public void setFich(UploadedFile fich) {
 		this.fich = fich;
 	}
 

@@ -1,49 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<h:html xmlns:h="http://java.sun.com/jsf/html"
+<html xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head></h:head>
 <h:body>
-	<h:form id="form">
-		<p:dataGrid var="f" value="#{films.allfilms}">
-			<p:panel header="#{f.titre}" style="text-align:center">
-				<h:panelGrid columns="1" style="width:100%">
-					<p:graphicImage name="demo/images/car/#{f.fiche}.gif" />
-					<h:outputText value="#{f.fiche}" />
-				</h:panelGrid>
-			</p:panel>
-		</p:dataGrid>
-		
-		<h:panelGrid columns="1" cellpadding="5">
-			
-		<!-- <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-			<h:outputText value="Resistance to PrimeFaces is futile!" /> -->
-
-		<p:dialog header="Car Info" widgetVar="dlg1">
-			<p:outputPanel id="carDetail" style="text-align:center;">
-				<p:panelGrid columns="2" rendered="#{films.editMode}"
-					columnClasses="label,value">
-					<h:outputText type="text" value="#{films.filmToshow.titre}"> </h:outputText>
-				</p:panelGrid>
-			</p:outputPanel>
-
-		</p:dialog>
-
-
-
-		<p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true"
-			height="100">
-			<h:outputText value="This is a Modal Dialog." />
-		</p:dialog>
-
-		<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode"
-			hideEffect="bounce" height="100">
-			<h:outputText value="This dialog has nice effects." />
-		</p:dialog>
-		</h:panelGrid>
+	<h:form enctype="multipart/form-data" id="form">
+	<p:fileUpload  mode="simple" value="#{films.fich}" />
+	<p:commandButton value="OK" ajax="false" action="#{films.addFilm}" />
+	<img src="data:image/png;base64,#{films.getBytes(11)}" />
 	</h:form>
 </h:body>
-</h:html>
+</html>
 
 
 

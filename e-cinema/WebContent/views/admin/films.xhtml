@@ -1,5 +1,6 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core" template="../../index.xhtml"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 	<ui:define name="contenu">
@@ -10,10 +11,10 @@
 				<h6 class="m-0 font-weight-bold text-primary">Liste des Films</h6>
 			</div>
 			<div class="card-body">
-				<h:form>
+				<h:form enctype="multipart/form-data">
 					<div class="table-responsive">
 						<div align="right">
-							<h:form id="action">
+							<h:form enctype="multipart/form-data" id="action">
 
 								<h:commandButton id="addFilm" value="Ajouter"
 									action="#{films.prepareAdd}" ajax="false"
@@ -65,9 +66,8 @@
 											</h:outputText></td>
 										<td>${f.description}</td>
 										<td>${f.duree}</td>
-										<td>
-										<h:graphicImage value="data:image/jpeg;base64,#{films.getBytes(2)}" />
-										</td>
+										<td><img width="50" height="50"
+											src="data:image/png;base64,#{films.getBytes(f.id)}" /></td>
 										<td>${f.titre}</td>
 										<td>${f.genre.nom}</td>
 										<td>${f.realisateur.nom}</td>
@@ -103,7 +103,8 @@
 		</div>
 		<!-- Ajouter film-->
 
-		<h:form  enctype="multipart/form-data" class="user" id="formNew" rendered="#{films.addMode}">
+		<h:form enctype="multipart/form-data" class="user" id="formNew"
+			rendered="#{films.addMode}">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Gestion des
@@ -142,11 +143,10 @@
 									placeholder="Duree">
 									<f:validateRequired />
 								</h:inputText>
-							</div>
+							</div> 
 							<div class="col-sm-6">
-								<h:outputLabel value="Fiche" for="fiche" />
-								<h:inputFile value="#{films.fich}" />
-								
+								<h:outputLabel value="Fiche" for="fiche" /><br/>
+								<p:fileUpload mode="simple" value="#{films.fich}" />
 							</div>
 							<div class="col-sm-6">
 								<h:outputLabel value="Titre" for="titre" />
@@ -159,13 +159,14 @@
 							<div class="col-sm-6">
 								<!-- select -->
 								<h:outputLabel value="Genre du film :" for="genre" />
-									<h:selectOneMenu value="#{films.idGenre}"  filter="true" class="form-control " > 
+								<h:selectOneMenu value="#{films.idGenre}" filter="true"
+									class="form-control ">
 									<f:selectItem itemLabel="Choisir" itemValue="#{null}"
 										noSelectionOption="true" />
 									<f:selectItems value="#{films.allGenres}" var="genre"
 										itemLabel="#{genre.nom}" itemValue="#{genre.id}" />
-							
-						</h:selectOneMenu>
+
+								</h:selectOneMenu>
 							</div>
 
 							<div class="col-sm-6">
@@ -176,7 +177,7 @@
 									id="realisateur" value="#{films.idrealisateur}">
 									<f:selectItem itemLabel="Chosir" itemValue="#{null}"
 										noSelectionOption="true" />
-									<f:selectItems  value="#{films.allRealisateurs}"
+									<f:selectItems value="#{films.allRealisateurs}"
 										var="realisateur" itemLabel="#{realisateur.nom}"
 										itemValue="#{realisateur.id}" />
 								</h:selectOneMenu>
@@ -191,7 +192,7 @@
 							</div>
 
 							<div class="col">
-								<h:commandButton value="Ajouter un film"
+								<p:commandButton value="Ajouter un film" ajax="false"
 									action="#{films.addFilm}" class="btn btn-secondary active " />
 							</div>
 						</div>
@@ -287,7 +288,8 @@
 										var="realisateur" itemLabel="#{realisateur.nom}"
 										itemValue="#{realisateur.id}" />
 								</h:selectOneMenu>
->>>>>>> branch 'master' of https://github.com/moussa23/e-cine.git
+								>>>>>>> branch 'master' of
+								https://github.com/moussa23/e-cine.git
 							</div>
 						</div>
 						<div class="row">
