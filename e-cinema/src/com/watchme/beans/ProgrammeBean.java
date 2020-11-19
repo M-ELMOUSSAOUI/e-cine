@@ -2,6 +2,7 @@ package com.watchme.beans;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,6 +35,7 @@ public class ProgrammeBean {
 	private boolean addMode = false;
 	private boolean activate;
 	private String data;
+	private List<Programme> filteredprg;
 
 	public boolean isActivate() {
 		return activate;
@@ -233,6 +235,14 @@ public class ProgrammeBean {
 	// Count number of Seances
 	public int count() {
 		return programmeService.findAll().size();
+	}
+
+	public List<Programme> getFilteredprg() {
+		return filteredprg;
+	}
+
+	public void setFilteredprg(List<Programme> filteredprg) {
+		this.filteredprg = filteredprg;
 	}
 
 }
